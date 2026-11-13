@@ -1,13 +1,20 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { FitSection, OfferDetail } from "@/components/content-blocks";
 import { ButtonLink, Eyebrow, PageHero, Section } from "@/components/ui";
 import { howTheyWorkTogether, offers, scholarship } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "Work With Me",
-  description:
-    "Fully Lit 1:1 Coaching, the Fully Lit Circle membership, and Fully Lit Midlife neurosomatic coaching.",
-};
+export const metadata = pageMetadata({
+  title: "Sobriety Coaching for Women: 1:1, Circle & Midlife",
+  description: "Work with a sober coach for women: Fully Lit 1:1 Coaching, the Fully Lit Circle sober community with weekly live calls, and Fully Lit Midlife.",
+  keywords: [
+    "1:1 sobriety coaching",
+    "online sober community for women",
+    "sober women membership",
+    "sobriety accountability partner",
+    "sobriety coaching program"
+  ],
+  path: "/work-with-me"
+});
 
 export default function WorkWithMePage() {
   return (

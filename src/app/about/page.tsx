@@ -1,12 +1,19 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Testimonials } from "@/components/content-blocks";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
 import { coach, signatureLines } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: `Meet ${coach.name}: 20 years sober, ICF-accredited, trauma-trained, and certified in neurosomatic and womb-centered somatic coaching.`,
-};
+export const metadata = pageMetadata({
+  title: "About Amber: Sober Coach, 20 Years Sober",
+  description: "Meet Amber: 20 years sober, ICF-accredited, trauma-trained, and certified in neurosomatic and womb-centered somatic coaching for women.",
+  keywords: [
+    "Amber sobriety coach",
+    "ICF accredited coach",
+    "trauma-informed coach",
+    "womb-centered somatic coaching"
+  ],
+  path: "/about"
+});
 
 export default function AboutPage() {
   return (

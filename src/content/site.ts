@@ -7,7 +7,7 @@ export const site = {
   name: "Amethyst & Ash",
   tagline: "Sober women, fully lit.",
   description:
-    "Body-led sobriety coaching for women getting or staying sober, and neurosomatic coaching for women in midlife transition.",
+    "Body-led sobriety and nervous system coaching for women ready to stop numbing out, quit drinking, and feel safe in their bodies again.",
   instagram: {
     handle: "@breakthefknpattern",
     url: "https://www.instagram.com/breakthefknpattern/",

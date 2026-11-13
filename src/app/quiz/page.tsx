@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Eyebrow, PageHero, Section, Todo } from "@/components/ui";
 import { quiz } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: quiz.title,
-  description:
-    "A free quiz on how you handle stress, what you reach for, and how your body feels. Find out what's running your pattern.",
-};
+export const metadata = pageMetadata({
+  title: "Free Quiz: What's Your Numbing Pattern?",
+  description: "Take the free quiz. Find out how you numb (wine, busyness, caretaking or shutdown), what's happening in your nervous system, and why willpower hasn't fixed it.",
+  keywords: [
+    "numbing pattern quiz",
+    "am I drinking too much quiz",
+    "burnout quiz",
+    "nervous system quiz"
+  ],
+  path: "/quiz"
+});
 
 export default function QuizPage() {
   return (

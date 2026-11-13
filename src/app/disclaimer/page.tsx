@@ -1,11 +1,13 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { DisclaimerText } from "@/components/content-blocks";
 import { PageHero, Section } from "@/components/ui";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Disclaimer",
-  description: "Coaching is not medical or mental health treatment. Please read before working together.",
-};
+  description: "Coaching is not medical or mental health treatment. Please read this before working together, including important safety information about withdrawal.",
+  keywords: [],
+  path: "/disclaimer"
+});
 
 export default function DisclaimerPage() {
   return (

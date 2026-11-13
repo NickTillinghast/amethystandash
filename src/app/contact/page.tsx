@@ -1,12 +1,17 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ContactForm } from "@/components/forms";
 import { Eyebrow, PageHero, Section } from "@/components/ui";
 import { site } from "@/content/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Book a Call",
-  description: "Reach out about 1:1 coaching, the Fully Lit Circle, or Fully Lit Midlife.",
-};
+  description: "Book a call with Amber, a sobriety and nervous system coach for women. Ask about 1:1 coaching, the Fully Lit Circle, or Fully Lit Midlife.",
+  keywords: [
+    "book a sobriety coach",
+    "sober coach consultation"
+  ],
+  path: "/contact"
+});
 
 export default function ContactPage() {
   return (

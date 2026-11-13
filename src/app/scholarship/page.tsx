@@ -1,12 +1,18 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ScholarshipForm } from "@/components/forms";
 import { Eyebrow, PageHero, Section } from "@/components/ui";
 import { scholarship } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "Circle Scholarship",
-  description: `${scholarship.spotsPerMonth} free spots in the Fully Lit Circle every month, so cost is never the reason a woman can't get support.`,
-};
+export const metadata = pageMetadata({
+  title: "Fully Lit Circle Scholarship",
+  description: "Two free spots in the Fully Lit Circle sober community every month, so cost is never the reason a woman can't get support. No proof or paperwork needed.",
+  keywords: [
+    "free sober support for women",
+    "sobriety scholarship",
+    "free sober community"
+  ],
+  path: "/scholarship"
+});
 
 export default function ScholarshipPage() {
   return (

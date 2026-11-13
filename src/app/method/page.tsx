@@ -1,13 +1,21 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { PillarRow } from "@/components/content-blocks";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
 import { differentiators, pillars, signatureLines } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "The Fully Lit Method",
-  description:
-    "Body-led sobriety in five pillars: Listen, Interrupt, Ground, Honor, Together. Capacity, not willpower.",
-};
+export const metadata = pageMetadata({
+  title: "The Fully Lit Method: Body-Led Sobriety for Women",
+  description: "A body-led approach to sobriety for women. Five pillars that build nervous system capacity, not willpower: Listen, Interrupt, Ground, Honor, Together.",
+  keywords: [
+    "Fully Lit Method",
+    "body-led sobriety",
+    "nervous system and sobriety",
+    "somatic tools for cravings",
+    "sobriety without willpower",
+    "human design"
+  ],
+  path: "/method"
+});
 
 export default function MethodPage() {
   return (

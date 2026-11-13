@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { site } from "@/content/site";
+import { coach, site } from "@/content/site";
+import { organizationJsonLd, pageMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -20,16 +21,16 @@ const dmSans = DM_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.tagline}`,
+    default: `${site.name} | Sobriety & Nervous System Coaching for Women`,
     template: `%s | ${site.name}`,
   },
-  description: site.description,
-  openGraph: {
-    siteName: site.name,
-    title: `${site.name} | ${site.tagline}`,
-    description: site.description,
-    type: "website",
-  },
+  applicationName: site.name,
+  authors: [{ name: coach.name, url: "/about" }],
+  creator: coach.name,
+  category: "health",
+  ...pageMetadata({ description: site.description, path: "/" }),
+  robots: { index: true, follow: true },
+  formatDetection: { telephone: false },
 };
 
 // Colors the mobile browser bar to match the header.
@@ -53,6 +54,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: organizationJsonLd() }}
+        />
       </body>
     </html>
   );

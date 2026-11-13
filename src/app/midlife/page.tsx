@@ -1,12 +1,20 @@
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
 import { offers, signatureLines } from "@/content/site";
 
-export const metadata: Metadata = {
-  title: "Fully Lit Midlife",
-  description:
-    "Neurosomatic coaching for women in midlife transition: perimenopause, burnout, anxiety. No sobriety focus required.",
-};
+export const metadata = pageMetadata({
+  title: "Fully Lit Midlife: Perimenopause & Burnout Coaching",
+  description: "Neurosomatic coaching for women in perimenopause, burnout and anxiety. Calm your nervous system and break old patterns. No sobriety focus required.",
+  keywords: [
+    "perimenopause coaching",
+    "midlife coach for women",
+    "burnout coaching for women",
+    "anxiety and nervous system",
+    "midlife transition",
+    "perimenopause anxiety"
+  ],
+  path: "/midlife"
+});
 
 const midlife = offers.find((o) => o.id === "midlife")!;
 
