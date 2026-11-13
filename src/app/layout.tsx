@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     description: site.description,
     type: "website",
   },
+};
+
+// Colors the mobile browser bar to match the header.
+export const viewport: Viewport = {
+  themeColor: "#1B1F3B",
+  colorScheme: "light",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

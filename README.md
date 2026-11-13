@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Amethyst & Ash
 
-## Getting Started
+*Sober women, fully lit.* Website for Amethyst & Ash: body-led sobriety coaching and the Fully Lit Method.
 
-First, run the development server:
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/content/site.ts`: most copy (offers, prices, pillars, testimonials, quiz, fit list). Anything in `[BRACKETS]` still needs filling in.
+- `src/app/`: one folder per page (`about`, `method`, `work-with-me`, `midlife`, `quiz`, `scholarship`, `contact`, `disclaimer`).
+- `src/app/globals.css`: brand colors and fonts.
+- `src/app/actions.ts`: form handling. Submissions are only logged for now; connect an email or booking tool here.
+- `src/components/`: header, footer, logo, forms and shared building blocks.
 
-## Learn More
+## Before launch
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Prices, program lengths and session frequency
+- About page photo
+- Connect the contact and scholarship forms to email or a CRM
+- Quiz embed (ScoreApp or Interact) and email platform
+- Domain (update `site.url` in `src/content/site.ts`)
+- Lawyer review of the disclaimer
