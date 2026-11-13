@@ -1,0 +1,106 @@
+import type { Metadata } from "next";
+import { Testimonials } from "@/components/content-blocks";
+import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
+import { coach, signatureLines } from "@/content/site";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: `Meet ${coach.name}: 20 years sober, ICF-accredited, trauma-trained, and certified in neurosomatic and womb-centered somatic coaching.`,
+};
+
+export default function AboutPage() {
+  return (
+    <>
+      <PageHero eyebrow="About" title="Twenty years sober. I've been where you are.">
+        <p>Hi, I&apos;m {coach.name}.</p>
+      </PageHero>
+
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
+          <div>
+            {/* TODO: swap for a real photo, e.g. <Image src="/about.jpg" ... /> */}
+            <div className="flex aspect-[4/5] items-center justify-center rounded-2xl bg-ash text-sm text-smoke-deep">
+              Photo goes here
+            </div>
+          </div>
+          <div className="space-y-6 text-lg leading-relaxed text-midnight/85">
+            <Eyebrow>My story</Eyebrow>
+            <p className="font-serif text-3xl leading-snug text-midnight">
+              I got sober 20 years ago, back when I had no idea who I was without something to numb
+              me.
+            </p>
+            <p>
+              Though I had a lot of guidance, nobody taught me how to actually feel. I had to figure
+              that shit out the hard way.
+            </p>
+            <p>
+              Since then I&apos;ve built a life I don&apos;t want to escape from, and a decade of
+              businesses that crossed six figures more than once. I&apos;ve sat in and led many
+              circles with women, led workshops, and walked many clients one-on-one through the
+              messy, beautiful work of coming back into their bodies.
+            </p>
+            <p>
+              I&apos;m ICF-accredited, trauma-trained, and certified in neurosomatic and
+              womb-centered somatic coaching. But truly, the real credential is that I&apos;ve been
+              where you are. I know what it&apos;s like when the feelings you&apos;ve been numbing
+              for years come flooding back, and I know how to help your nervous system handle them
+              without reaching for the old, familiar coping tools.
+            </p>
+            <p>
+              With me guiding you, you won&apos;t be wandering aimlessly, hoping sobriety will
+              stick. You&apos;ll learn to finally feel safe in your own skin, with a clear road map
+              to follow confidently on your journey.
+            </p>
+            <ul className="flex flex-wrap gap-2 pt-4" aria-label="Credentials">
+              {coach.credentials.map((c) => (
+                <li
+                  key={c}
+                  className="rounded-full border border-amethyst/30 bg-lilac-wash px-4 py-1.5 text-sm text-amethyst"
+                >
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      <section className="bg-midnight py-24 text-center sm:py-32">
+        <Container className="max-w-4xl">
+          <SignatureLine onDark>{signatureLines.surviving}</SignatureLine>
+        </Container>
+      </section>
+
+      <Section tone="white">
+        <div className="grid gap-12 lg:grid-cols-2">
+          <div>
+            <Eyebrow>Why the purple elephant?</Eyebrow>
+            <h2 className="mt-5 text-4xl sm:text-5xl">The one thing that breaks the pattern.</h2>
+          </div>
+          <p className="text-lg leading-relaxed text-midnight/85">
+            In a room full of gray, she&apos;s the one you can&apos;t miss. That&apos;s the point.
+            Breaking the pattern means being willing to stand out, to do it differently, and to
+            stop blending into a life that was slowly dimming you.
+          </p>
+        </div>
+      </Section>
+
+      <Section tone="midnight">
+        <div className="mb-12 max-w-2xl">
+          <Eyebrow onDark>Kind words</Eyebrow>
+          <h2 className="mt-5 text-4xl sm:text-5xl">From women I&apos;ve worked with.</h2>
+        </div>
+        <Testimonials />
+      </Section>
+
+      <Section>
+        <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+          <h2 className="max-w-xl text-4xl sm:text-5xl">Want to talk about where you are?</h2>
+          <ButtonLink href="/contact" variant="midnight">
+            Book a call
+          </ButtonLink>
+        </div>
+      </Section>
+    </>
+  );
+}
