@@ -1,0 +1,262 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Amethyst & Ash, one-time setup (deploy by hand, as an admin).
+  Everything the every-push deploy needs but must not be able to create itself:
+  the GitHub deploy role, the Lambda's role, the image repository and the static
+  files bucket. Keeping IAM here means a push to main can never create new roles.
+
+Parameters:
+  GitHubOwner:
+    Type: String
+    Default: NickTillinghast
+  GitHubRepoName:
+    Type: String
+    Default: amethystandash
+  # GitHub's sign-in token names the repo with these permanent ids too, so a renamed or
+  # re-created repo with the same name can't deploy.
+  # From https://api.github.com/repos/<owner>/<repo> (owner.id and id)
+  GitHubOwnerId:
+    Type: String
+    Default: "52227772"
+  GitHubRepoId:
+    Type: String
+    Default: "1456796444"
+  GitHubOidcProviderExists:
+    Type: String
+    Default: "true"
+    AllowedValues: ["true", "false"]
+    Description: >-
+      An AWS account can only have one GitHub sign-in provider, and the
+      nickshouseofhorrors bootstrap already made it in this account. Set "false" only
+      if this is a different AWS account that has never had one.
+
+Conditions:
+  CreateOidcProvider: !Equals [!Ref GitHubOidcProviderExists, "false"]
+
+Resources:
+  # Lets GitHub Actions sign in to AWS with short-lived tokens, no stored AWS keys
+  GitHubOidcProvider:
+    Type: AWS::IAM::OIDCProvider
+    Condition: CreateOidcProvider
+    Properties:
+      Url: https://token.actions.githubusercontent.com
+      ClientIdList:
+        - sts.amazonaws.com
+
+  # Docker images of the site, one per commit
+  ImageRepository:
+    Type: AWS::ECR::Repository
+    Properties:
+      RepositoryName: amethystandash
+      ImageScanningConfiguration:
+        ScanOnPush: true
+      LifecyclePolicy:
+        LifecyclePolicyText: |
+          {
+            "rules": [
+              {
+                "rulePriority": 1,
+                "description": "Keep the last 10 images, enough to roll back",
+                "selection": {
+                  "tagStatus": "any",
+                  "countType": "imageCountMoreThan",
+                  "countNumber": 10
+                },
+                "action": { "type": "expire" }
+              }
+            ]
+          }
+      # Lambda pulls the image itself, so it needs read access to this repository
+      RepositoryPolicyText:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: LambdaPull
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action:
+              - ecr:BatchGetImage
+              - ecr:GetDownloadUrlForLayer
+            Condition:
+              StringLike:
+                aws:sourceArn: !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:*
+
+  # /_next/static, served by CloudFront (never public on its own)
+  AssetsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+  # What the site itself runs as: write logs, nothing else
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+  # GitHub Actions assumes this on every push to main. It can deploy the app stack and
+  # nothing more: it can't create IAM roles, only hand the one Lambda role above to Lambda
+  DeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 3600
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !If
+                - CreateOidcProvider
+                - !Ref GitHubOidcProvider
+                - !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                # Only the main branch. GitHub now sends the form with ids; the plain
+                # form is kept in case a repo setting switches back to it
+                token.actions.githubusercontent.com:sub:
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${GitHubRepoName}@${GitHubRepoId}:ref:refs/heads/main
+                  - !Sub repo:${GitHubOwner}/${GitHubRepoName}:ref:refs/heads/main
+      Policies:
+        - PolicyName: deploy
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: EcrLogin
+                Effect: Allow
+                Action: ecr:GetAuthorizationToken
+                Resource: "*"
+              - Sid: EcrPushPull
+                Effect: Allow
+                Action:
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:InitiateLayerUpload
+                  - ecr:UploadLayerPart
+                  - ecr:CompleteLayerUpload
+                  - ecr:PutImage
+                  - ecr:BatchGetImage
+                  - ecr:GetDownloadUrlForLayer
+                  - ecr:DescribeImages
+                  - ecr:GetRepositoryPolicy
+                Resource: !GetAtt ImageRepository.Arn
+              - Sid: StaticFiles
+                Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                Resource: !Sub ${AssetsBucket.Arn}/*
+              - Sid: StaticFilesBucket
+                Effect: Allow
+                Action:
+                  - s3:ListBucket
+                  - s3:GetBucketPolicy
+                  - s3:PutBucketPolicy
+                  - s3:DeleteBucketPolicy
+                Resource: !GetAtt AssetsBucket.Arn
+              - Sid: AppStack
+                Effect: Allow
+                Action:
+                  - cloudformation:CreateStack
+                  - cloudformation:UpdateStack
+                  - cloudformation:DescribeStacks
+                  - cloudformation:DescribeStackEvents
+                  - cloudformation:DescribeStackResources
+                  - cloudformation:GetTemplate
+                  - cloudformation:CreateChangeSet
+                  - cloudformation:DescribeChangeSet
+                  - cloudformation:ExecuteChangeSet
+                  - cloudformation:DeleteChangeSet
+                Resource: !Sub arn:${AWS::Partition}:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/amethystandash-app/*
+              - Sid: ReadOtherStacks
+                Effect: Allow
+                Action:
+                  - cloudformation:DescribeStacks
+                  - cloudformation:ListExports
+                  - cloudformation:GetTemplateSummary
+                  - cloudformation:ValidateTemplate
+                Resource: "*"
+              - Sid: SiteFunction
+                Effect: Allow
+                Action: lambda:*
+                Resource: !Sub arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:amethystandash-*
+              - Sid: PassOnlyTheLambdaRole
+                Effect: Allow
+                Action: iam:PassRole
+                Resource: !GetAtt LambdaExecutionRole.Arn
+                Condition:
+                  StringEquals:
+                    iam:PassedToService: lambda.amazonaws.com
+              - Sid: SiteLogs
+                Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:DeleteLogGroup
+                  - logs:PutRetentionPolicy
+                  - logs:DeleteRetentionPolicy
+                  - logs:TagResource
+                  - logs:UntagResource
+                  - logs:ListTagsForResource
+                Resource: !Sub arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/amethystandash-*
+              - Sid: DescribeLogs
+                Effect: Allow
+                Action: logs:DescribeLogGroups
+                Resource: "*"
+              # CloudFront has no per-resource names to scope to before they exist
+              - Sid: Cdn
+                Effect: Allow
+                Action: cloudfront:*
+                Resource: "*"
+              - Sid: Dns
+                Effect: Allow
+                Action:
+                  - route53:ChangeResourceRecordSets
+                  - route53:GetHostedZone
+                  - route53:ListResourceRecordSets
+                  - route53:GetChange
+                Resource:
+                  - !Sub arn:${AWS::Partition}:route53:::hostedzone/*
+                  - !Sub arn:${AWS::Partition}:route53:::change/*
+
+Outputs:
+  DeployRoleArn:
+    Description: Put this in the GitHub repo variable AWS_DEPLOY_ROLE_ARN
+    Value: !GetAtt DeployRole.Arn
+  ImageRepositoryUri:
+    Value: !GetAtt ImageRepository.RepositoryUri
+    Export:
+      Name: amethystandash-image-repository-uri
+  AssetsBucketName:
+    Value: !Ref AssetsBucket
+    Export:
+      Name: amethystandash-assets-bucket
+  AssetsBucketArn:
+    Value: !GetAtt AssetsBucket.Arn
+    Export:
+      Name: amethystandash-assets-bucket-arn
+  AssetsBucketDomain:
+    Value: !GetAtt AssetsBucket.RegionalDomainName
+    Export:
+      Name: amethystandash-assets-bucket-domain
+  LambdaExecutionRoleArn:
+    Value: !GetAtt LambdaExecutionRole.Arn
+    Export:
+      Name: amethystandash-lambda-role-arn

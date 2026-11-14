@@ -1,0 +1,10 @@
+# Keep secrets, local builds and git history out of the Docker build
+.env*
+.git
+.github
+.next
+node_modules
+infra
+*.tsbuildinfo
+npm-debug.log*
+.DS_Store

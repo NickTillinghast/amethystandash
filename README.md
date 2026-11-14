@@ -19,6 +19,10 @@ Then open http://localhost:3000.
 - `src/app/actions.ts`: form handling. Submissions are only logged for now; connect an email or booking tool here.
 - `src/components/`: header, footer, logo, forms and shared building blocks.
 
+## Hosting
+
+The site runs on AWS (Lambda + CloudFront) and deploys on every push to `main`. One-time setup and everyday use are in [infra/README.md](infra/README.md).
+
 ## Before launch
 
 - Prices, program lengths and session frequency

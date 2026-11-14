@@ -1,0 +1,47 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Amethyst & Ash, one-time: the Route 53 hosted zone. Finishes right away.
+  Copy the NameServers output into Wix ("Use custom nameservers"), then deploy dns-cert.yml.
+
+Parameters:
+  DomainName:
+    Type: String
+    Default: amethystandashcoaching.com
+  # Proves to Google Search Console that we own the domain. Not a secret: anyone can look it up.
+  # Leave empty until Search Console gives you one, then redeploy this stack with it
+  GoogleSiteVerification:
+    Type: String
+    Default: ""
+    Description: e.g. google-site-verification=abc123
+
+Conditions:
+  HasGoogleSiteVerification: !Not [!Equals [!Ref GoogleSiteVerification, ""]]
+
+Resources:
+  HostedZone:
+    Type: AWS::Route53::HostedZone
+    Properties:
+      Name: !Ref DomainName
+      HostedZoneConfig:
+        Comment: Amethyst & Ash (registered at Wix, DNS here)
+
+  # TXT records on the bare domain. Add other verifications (Bing, email providers) to this list
+  RootTxt:
+    Type: AWS::Route53::RecordSet
+    Condition: HasGoogleSiteVerification
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: TXT
+      TTL: "300"
+      ResourceRecords:
+        - !Sub '"${GoogleSiteVerification}"'
+
+Outputs:
+  HostedZoneId:
+    Value: !Ref HostedZone
+    Export:
+      Name: amethystandash-hosted-zone-id
+  NameServers:
+    Description: Paste these 4 into Wix
+    Value: !Join [", ", !GetAtt HostedZone.NameServers]
