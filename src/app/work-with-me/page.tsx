@@ -1,36 +1,34 @@
 import { pageMetadata } from "@/lib/seo";
-import { FitSection, OfferDetail } from "@/components/content-blocks";
-import { ButtonLink, Eyebrow, PageHero, Section } from "@/components/ui";
-import { howTheyWorkTogether, offers, scholarship } from "@/content/site";
+import { FitSection, ProgramDetail, SingleSessionCard } from "@/components/content-blocks";
+import { Eyebrow, PageHero, Section } from "@/components/ui";
+import { programs } from "@/content/site";
 
 export const metadata = pageMetadata({
-  title: "Sobriety Coaching for Women: 1:1, Circle & Midlife",
-  description: "Work with a sober coach for women: Fully Lit 1:1 Coaching, the Fully Lit Circle sober community with weekly live calls, and Fully Lit Midlife.",
+  title: "Sobriety & Midlife Coaching for Women: Programs & Pricing",
+  description:
+    "Body-Led Sobriety: 12 weeks of 1:1 sobriety coaching for women. Midlife Neurosomatic Coaching: 3 months for perimenopause, burnout and anxiety. Or start with a single session.",
   keywords: [
     "1:1 sobriety coaching",
-    "online sober community for women",
-    "sober women membership",
-    "sobriety accountability partner",
-    "sobriety coaching program"
+    "12 week sobriety program",
+    "sobriety coaching program",
+    "midlife coaching for women",
+    "perimenopause coaching",
+    "neurosomatic coaching",
   ],
-  path: "/work-with-me"
+  path: "/work-with-me",
 });
 
 export default function WorkWithMePage() {
   return (
     <>
-      <PageHero eyebrow="Work with me" title="Three ways in.">
-        <p>
-          Two paths for sobriety and one for midlife. One-on-one goes deep. The membership keeps
-          the light on between sessions and after.
-        </p>
-      </PageHero>
+      <PageHero eyebrow="Work with me" title="Ways to work together." />
 
       <Section>
         <div className="space-y-8">
-          {offers.map((o, i) => (
-            <OfferDetail key={o.id} offer={o} number={i + 1} />
+          {programs.map((p) => (
+            <ProgramDetail key={p.id} program={p} />
           ))}
+          <SingleSessionCard />
         </div>
       </Section>
 
@@ -41,40 +39,6 @@ export default function WorkWithMePage() {
         </div>
         <FitSection />
       </Section>
-
-      <Section tone="white">
-        <div className="grid gap-12 lg:grid-cols-2">
-          <div>
-            <Eyebrow>How they work together</Eyebrow>
-            <h2 className="mt-5 text-4xl sm:text-5xl">The deep dive, and the place the work keeps living.</h2>
-          </div>
-          <ul className="space-y-5 text-lg leading-relaxed">
-            {howTheyWorkTogether.map((line) => (
-              <li key={line} className="flex gap-4">
-                <span aria-hidden className="mt-3 h-1.5 w-1.5 flex-none rotate-45 bg-gold" />
-                <span>{line}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Section>
-
-      <section className="bg-midnight py-20 text-cream sm:py-24">
-        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 sm:px-6 md:grid-cols-[1.5fr_1fr]">
-          <div>
-            <Eyebrow onDark>Circle scholarships</Eyebrow>
-            <h2 className="mt-5 text-4xl sm:text-5xl">Cost should never be the reason.</h2>
-            <p className="mt-6 text-lg leading-relaxed text-cream/80">
-              Every month, {scholarship.spotsPerMonth} spots in the Fully Lit Circle go to women who
-              can&apos;t swing the cost right now. No proof, no paperwork, no shame. Just a short
-              application.
-            </p>
-          </div>
-          <div className="md:text-right">
-            <ButtonLink href="/scholarship">Apply for a scholarship</ButtonLink>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

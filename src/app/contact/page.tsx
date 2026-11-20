@@ -5,7 +5,7 @@ import { site } from "@/content/site";
 
 export const metadata = pageMetadata({
   title: "Book a Call",
-  description: "Book a call with Amber, a sobriety and nervous system coach for women. Ask about 1:1 coaching, the Fully Lit Circle, or Fully Lit Midlife.",
+  description: "Book a call with Amber, a sobriety and nervous system coach for women. Ask about Body-Led Sobriety, Midlife Neurosomatic Coaching, or a single session.",
   keywords: [
     "book a sobriety coach",
     "sober coach consultation"

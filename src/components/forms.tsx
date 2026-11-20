@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useActionState, type ReactNode } from "react";
 import { submitContact, submitScholarship, type FormState } from "@/app/actions";
+import { offerings } from "@/content/site";
 
 const initial: FormState = { status: "idle" };
 
@@ -130,9 +131,11 @@ export function ContactForm() {
           <option value="" disabled>
             Choose one
           </option>
-          <option value="one-to-one">Fully Lit 1:1 Coaching</option>
-          <option value="circle">The Fully Lit Circle</option>
-          <option value="midlife">Fully Lit Midlife</option>
+          {offerings.map((o) => (
+            <option key={o.id} value={o.id}>
+              {o.name}
+            </option>
+          ))}
           <option value="not-sure">Not sure yet, let&apos;s talk</option>
         </select>
       </Field>

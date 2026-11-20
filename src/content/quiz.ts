@@ -119,83 +119,74 @@ export type QuizResult = {
   pattern: string;
   nervousSystem: string;
   willpower: string;
-  superpower: string;
-  startWith: { pillar: string; body: string };
-  /** Shown for results where stopping suddenly could be medically risky. */
+  startWith: string;
+  /** Safety note shown in a highlighted box, for results where it matters. */
   safetyNote?: string;
+  /** The line shown with the Book a Call button. */
+  callToAction: string;
 };
 
-// DRAFT result copy, written from the brand guide. Have the client review before launch.
+// Result copy from Amber (Nov 20, 2026).
 export const results: Record<ResultId, QuizResult> = {
   achiever: {
     id: "achiever",
     name: "The Achiever",
     headline: "You numb by doing.",
     pattern:
-      "You're the one who gets it done. Busy isn't just your schedule, it's your safety. As long as you're moving, producing and checking things off, the feelings underneath can't catch up with you.",
+      "You're the one who gets it done. The business, the house, the calendar, the next goal. From the outside it looks like drive. On the inside, stopping feels unsafe.",
     nervousSystem:
-      "Your nervous system is stuck in “go.” The stress response built for short bursts of fight-or-flight has become your everyday setting. That's why your mind races, your jaw stays tight, and rest feels more like guilt than relief.",
+      "Your nervous system is stuck in go mode. Busyness has become your way of staying one step ahead of what you don't want to feel. Every finished task gives you a tiny hit of relief, so your body keeps asking for more. Rest feels like guilt, and stillness feels like danger.",
     willpower:
-      "You've probably tried to fix this the way you fix everything: with a plan and more discipline. But willpower runs on the same system that's already maxed out. You can't push your way into calm.",
-    superpower:
-      "Your drive, focus and follow-through are real gifts. Right now they're pointed at outrunning yourself. Redirected, they build a life you don't need to escape from.",
-    startWith: {
-      pillar: "L · Listen to the body",
-      body: "Learn to notice your body's signals before you override them, so slowing down starts to feel safe instead of scary.",
-    },
+      "You've tried to “just slow down.” But you can't think your way out of a pattern your body is running. Telling a revved-up nervous system to relax is like telling a car to stop while your foot is still on the gas.",
+    startWith:
+      "Practice stopping before you're “done.” Once a day, set a 5-minute timer, put your phone and your list down, and just sit. Notice what your body does when there's nothing to fix or finish. The restlessness that comes up isn't a sign you're wasting time. It's the pattern showing itself. That's your starting point, and it's exactly what we work with together: teaching your body it's safe to rest without having to earn it.",
+    callToAction: "Let's talk about what slowing down could actually look like for you.",
   },
   "escape-artist": {
     id: "escape-artist",
     name: "The Escape Artist",
     headline: "You numb by taking the edge off.",
     pattern:
-      "The wine at 6pm. The joint after everyone's in bed. The sugar, the scroll, whatever changes how you feel fast. It started as relief, and it worked, until it became the thing you think about most.",
+      "The glass of wine at 5pm. The joint after the kids are down. The sugar, the scroll, the anything. You know exactly what you reach for, and you've probably promised yourself more than once that tomorrow will be different.",
     nervousSystem:
-      "Your system is looking for a fast way down. When stress builds and your body doesn't know another way to settle, a drink or a hit does it for you. The catch: every quick downshift is followed by a rebound, more anxious and more restless, so the next one feels even more necessary. That's the loop.",
+      "Your nervous system is overloaded and looking for the fastest exit. Alcohol and weed work, for a while. They quiet the buzz, soften the edges, and give you a break from your own skin. But each time, your body learns that relief only comes from outside of you, so the urge comes back stronger.",
     willpower:
-      "Willpower asks the most stressed-out version of you to say no at the exact moment your body is screaming for relief. That's not a fair fight. What changes it is giving your nervous system other ways to settle, so the urge has somewhere else to go.",
-    superpower:
-      "You're wired to feel deeply and to go after relief, freedom and aliveness. Nothing wrong with that. When you learn to get there without the drink or the hit, that same hunger becomes your fuel.",
-    startWith: {
-      pillar: "I · Interrupt the pattern",
-      body: "Name the loop, honor what it's done for you, and build your Instead Menu for the moments that used to send you reaching.",
-    },
+      "Nothing is wrong with you. You're not weak and you're not broken. You're fighting a survival pattern with white knuckles, and the urge is coming from a place deeper than willpower can reach.",
+    startWith:
+      "Get curious about the 10 minutes before you reach. Next time the urge hits, pause and ask: What's happening in my body right now? What do I actually need? Tired, lonely, wired, overwhelmed? You don't have to stop yet. Just notice. Cravings are signals, not commands, and learning to read them is the first step of Body-Led Sobriety.",
     safetyNote:
-      "If you drink or use every day, please don't stop suddenly on your own. Withdrawal can be dangerous. Talk to a doctor first, and I'll be right here alongside it.",
+      "If you're drinking or using daily, please talk to a doctor before stopping. Withdrawal can be medically serious, and I want you safe.",
+    callToAction: "Let's talk about what freedom could look like for you.",
   },
   caretaker: {
     id: "caretaker",
     name: "The Caretaker",
     headline: "You numb by taking care of everyone else.",
     pattern:
-      "You know what everyone needs before they ask. You're the steady one, the fixer, the “I'm good, how are you?” And somewhere along the way, your own needs went quiet.",
+      "You're the one everybody leans on. You know what everyone needs before they ask. And somewhere along the way, you stopped asking what you need.",
     nervousSystem:
-      "Your nervous system learned that safety comes from keeping everyone else okay. It's called the fawn response: scanning the room, smoothing things over, putting yourself last. It leaves you tense, depleted and quietly resentful, with no room to feel your own feelings.",
+      "Your nervous system learned that you're safe when everyone else is okay. So your attention is always pointed outward. Holding everyone up keeps you so busy that your own feelings never get a turn. That tension in your shoulders and chest is your body carrying the weight.",
     willpower:
-      "You can't willpower your way into self-care while your body believes your needs are a threat to the people you love. You don't need more discipline to put yourself first. You need your system to learn that it's safe to.",
-    superpower:
-      "Your empathy and attunement are rare. Turned toward yourself, they're what finally lets you know what you want, and ask for it.",
-    startWith: {
-      pillar: "H · Honor your design",
-      body: "Self-compassion and human design help you understand your own wiring, so you stop overwriting who you are to keep everyone else comfortable.",
-    },
+      "You've tried to put yourself first. Then someone needed you, and you went right back. That's not a lack of discipline. Your body treats your own needs as a threat to everyone's safety, and that runs deeper than any good intention.",
+    startWith:
+      "Ask yourself one question every day, before you ask anyone else: “What do I need right now?” Then put one hand on your chest and wait for the answer. It might be water, a nap, quiet, or a no. You don't have to act on it yet. Just let yourself hear it. Coming back to yourself starts with listening, and that's where our work together begins.",
+    callToAction: "It's your turn. Let's talk about what you need.",
   },
   shutdown: {
     id: "shutdown",
     name: "The Burnt-Out Shutdown",
-    headline: "You've gone numb because you're running on empty.",
+    headline: "You've been running on empty so long, your body hit the brakes.",
     pattern:
-      "You're not lazy and you're not broken. You've been holding it together for so long that your body finally pulled the plug. Foggy, flat, tired in your bones, scrolling until it's somehow 10pm.",
+      "You're tired in a way sleep doesn't fix. Foggy. Flat. Some days it feels like you're watching your own life from the outside. You don't feel much of anything anymore, and that might scare you more than feeling too much ever did.",
     nervousSystem:
-      "This is your nervous system's freeze response. After too long in overdrive, your body saves what little energy is left by turning things down: motivation, feeling, connection. It's protection, not failure.",
+      "After pushing for too long, your nervous system shifted into shutdown to protect you. It's turned the volume down on everything: energy, motivation, joy, desire. It's not laziness. It's your body's last line of defense. And in midlife, hormone shifts can make it hit even harder.",
     willpower:
-      "Willpower needs energy you don't have right now. Pushing harder from shutdown just digs the hole deeper. The way out is gentle: small doses of safety and energy that slowly bring your body back online.",
-    superpower:
-      "Underneath the flat is a woman who cared so much, for so long, that she ran out. That depth of care is still there, and it can come back.",
-    startWith: {
-      pillar: "G · Ground the whole body",
-      body: "Look at what's quietly draining you: sleep, hormones, food, energy and daily rhythm. Small, steady changes your body can actually hold.",
-    },
+      "You can't push your way out of a state your body went into because you pushed too hard. Trying harder just drains what little you have left.",
+    startWith:
+      "Go gentle, not harder. Pick one small thing each day that brings a little life back into your body: stepping outside in the sun, a warm shower, a song you love, feeling your feet on the ground. No goals, no pushing. You're not trying to fix anything yet. You're showing your body it's safe to come back online, slowly. That's how we start, together.",
+    safetyNote:
+      "If the flatness feels heavy or hopeless, please also reach out to a doctor or therapist. Coaching works best alongside that support, not in place of it.",
+    callToAction: "Let's talk about getting your spark back.",
   },
 };
 

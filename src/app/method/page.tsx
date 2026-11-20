@@ -23,7 +23,7 @@ export default function MethodPage() {
       <PageHero eyebrow="The Fully Lit Method · Body-Led Sobriety" title="Five pillars. One whole woman.">
         <p>
           Five pillars, not steps. Each one builds capacity in your nervous system so sobriety feels
-          steady and chosen, not forced. Together they spell <strong className="text-gold">LIGHT</strong>.
+          steady and accessible, not forced.
         </p>
       </PageHero>
 

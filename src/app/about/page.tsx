@@ -37,25 +37,27 @@ export default function AboutPage() {
               me.
             </p>
             <p>
-              Though I had a lot of guidance, nobody taught me how to actually feel. I had to figure
-              that shit out the hard way.
+              Though I had a lot of guidance, nobody taught me how to actually feel. I didn&apos;t find the resources  until way later.I realized after almost two decades sober after hitting menopause naturally at age 40 that my body was trying to tell me something.That is when I realized that my nervous system spending a lifetime in survival mode had finally caught up with me .I got curious amidst my shock and grief at the end of an era I had not expected.
+              When I found guidance through neurosomatic work , I felt a sense of hope for emotionally growing in a way I had never experienced.
+  
             </p>
             <p>
-              Since then I&apos;ve built a life I don&apos;t want to escape from, and a decade of
+              Since then I have learned to thrive through feeling my emotions and gaining a level of maturity I never knew I wanted.I have learned to stop abandoning myself and being afraid to speak my authentic truth regardless of who it might make uncomfortable.I have shown myself that no matter what difficult situations arise, I can get persevere confidently. 
+              &apos;ve built a life I don&apos;t want to escape from, and a decade of
               businesses that crossed six figures more than once. I&apos;ve sat in and led many
-              circles with women, led workshops, and walked many clients one-on-one through the
+              circles with women through learning to become the experts of their own nervous systems, led workshops, and walked many clients one-on-one through the
               messy, beautiful work of coming back into their bodies.
             </p>
             <p>
               I&apos;m ICF-accredited, trauma-trained, and certified in neurosomatic and
-              womb-centered somatic coaching. But truly, the real credential is that I&apos;ve been
+              female nervous system centered somatic coaching. But truly, the real credential is that I&apos;ve been
               where you are. I know what it&apos;s like when the feelings you&apos;ve been numbing
               for years come flooding back, and I know how to help your nervous system handle them
               without reaching for the old, familiar coping tools.
             </p>
             <p>
               With me guiding you, you won&apos;t be wandering aimlessly, hoping sobriety will
-              stick. You&apos;ll learn to finally feel safe in your own skin, with a clear road map
+              stick or suffering throught the physiological and biological changes you are experincing in midlife. You&apos;ll learn to finally feel safe in your own skin, with a clear road map
               to follow confidently on your journey.
             </p>
             <ul className="flex flex-wrap gap-2 pt-4" aria-label="Credentials">

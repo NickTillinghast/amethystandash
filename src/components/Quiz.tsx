@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitQuizLead, type QuizLeadState } from "@/app/actions";
 import { questions, quizTitle, results, type Letter, type QuizResult } from "@/content/quiz";
-import { signatureLines } from "@/content/site";
 
 const LETTERS: Letter[] = ["A", "B", "C", "D"];
 const INTRO = -1;
@@ -230,7 +229,6 @@ function ResultView({
   const sections = [
     { title: "What's happening in your body", body: result.nervousSystem },
     { title: "Why willpower hasn't fixed it", body: result.willpower },
-    { title: "Your hidden superpower", body: result.superpower },
   ];
   return (
     <div>
@@ -250,46 +248,29 @@ function ResultView({
         ))}
       </div>
 
+      <section className="mt-10 rounded-2xl bg-midnight p-6 text-cream sm:p-8">
+        <h3 className="eyebrow text-gold">Where to start</h3>
+        <p className="mt-4 text-lg leading-relaxed text-cream/90">{result.startWith}</p>
+      </section>
+
       {result.safetyNote ? (
-        <div className="mt-10 rounded-xl bg-lilac-wash p-5">
-          <p className="font-semibold">Please don&apos;t detox alone.</p>
-          <p className="mt-1 leading-relaxed">{result.safetyNote}</p>
-        </div>
+        <p className="mt-6 rounded-xl bg-lilac-wash p-5 leading-relaxed">{result.safetyNote}</p>
       ) : null}
 
-      <div className="mt-10 rounded-2xl bg-midnight p-6 text-cream sm:p-8">
-        <p className="eyebrow text-lilac">Where to start</p>
-        <p className="mt-3 font-serif text-2xl text-gold sm:text-3xl">{result.startWith.pillar}</p>
-        <p className="mt-3 leading-relaxed text-cream/85">{result.startWith.body}</p>
-      </div>
-
-      <blockquote className="mt-12 text-center font-serif text-2xl leading-snug italic sm:text-3xl">
-        &ldquo;{signatureLines.superpowers}&rdquo;
-      </blockquote>
-
-      <div className="mt-10 flex flex-col items-center gap-4 text-center">
-        <p className="max-w-lg text-lg leading-relaxed text-midnight/80">
-          Awareness is where it starts. The tools are where it changes. Let&apos;s talk about what
-          that looks like for you.
+      <div className="mt-12 flex flex-col items-center gap-6 text-center">
+        <p className="max-w-lg font-serif text-2xl leading-snug sm:text-3xl">
+          {result.callToAction}
         </p>
-        <div className="mt-2 flex flex-col gap-4 sm:flex-row">
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-midnight px-8 py-4 text-sm font-semibold tracking-[0.12em] text-cream uppercase transition-colors hover:bg-midnight-soft"
-          >
-            Book a call
-          </Link>
-          <Link
-            href="/work-with-me"
-            className="inline-flex items-center justify-center rounded-full border border-midnight/30 px-8 py-4 text-sm font-semibold tracking-[0.12em] text-midnight uppercase transition-colors hover:border-amethyst hover:text-amethyst"
-          >
-            Ways to work together
-          </Link>
-        </div>
+        <Link
+          href="/contact"
+          className="inline-flex items-center justify-center rounded-full bg-gold px-8 py-4 text-sm font-semibold tracking-[0.12em] text-midnight uppercase transition-colors hover:bg-[#ecc97f]"
+        >
+          Book a call
+        </Link>
         <button
           type="button"
           onClick={onRetake}
-          className="mt-4 text-sm text-smoke-deep underline underline-offset-4 hover:text-amethyst"
+          className="text-sm text-smoke-deep underline underline-offset-4 hover:text-amethyst"
         >
           Retake the quiz
         </button>

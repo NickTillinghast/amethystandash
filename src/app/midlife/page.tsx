@@ -1,9 +1,10 @@
+import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
-import { offers, signatureLines } from "@/content/site";
+import { programs, signatureLines } from "@/content/site";
 
 export const metadata = pageMetadata({
-  title: "Fully Lit Midlife: Perimenopause & Burnout Coaching",
+  title: "Midlife Neurosomatic Coaching: Perimenopause & Burnout",
   description: "Neurosomatic coaching for women in perimenopause, burnout and anxiety. Calm your nervous system and break old patterns. No sobriety focus required.",
   keywords: [
     "perimenopause coaching",
@@ -16,10 +17,10 @@ export const metadata = pageMetadata({
   path: "/midlife"
 });
 
-const midlife = offers.find((o) => o.id === "midlife")!;
+const midlife = programs.find((p) => p.id === "midlife")!;
 
 const signs = [
-  "Perimenopause has rewritten the rules, and nobody gave you the new ones.",
+  "Perimenopause/menopause has rewritten the rules, and nobody gave you the new ones.",
   "You're running on fumes and calling it normal.",
   "Anxiety shows up out of nowhere, in a body you used to trust.",
   "The life you built doesn't quite fit the woman living it anymore.",
@@ -28,7 +29,7 @@ const signs = [
 export default function MidlifePage() {
   return (
     <>
-      <PageHero eyebrow="Fully Lit Midlife · Neurosomatic coaching" title="Not broken. In transition.">
+      <PageHero eyebrow="Midlife Neurosomatic Coaching" title="Not broken. In transition.">
         <p>
           For women in perimenopause, burnout, anxiety, or the feeling of being a stranger
           to yourself, who want to stop being run by old patterns. No sobriety focus required.
@@ -68,24 +69,24 @@ export default function MidlifePage() {
             <Eyebrow>What we work on</Eyebrow>
             <h2 className="mt-5 text-4xl sm:text-5xl">Same method. Different lens.</h2>
             <p className="mt-6 text-lg leading-relaxed text-midnight/80">
-              Fully Lit Midlife uses the five pillars of the Fully Lit Method with the sobriety lens
-              swapped for transition. Capacity, not willpower. Curiosity, not shame.
+              {midlife.intro}
             </p>
-            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Details">
-              {midlife.details.map((d) => (
-                <li
-                  key={d}
-                  className="rounded-full border border-midnight/15 px-3 py-1 text-xs tracking-wide text-smoke-deep"
-                >
-                  {d}
-                </li>
-              ))}
-            </ul>
+            <p className="mt-6 font-semibold leading-relaxed text-smoke-deep">{midlife.format}</p>
+            <p className="mt-4 font-serif text-2xl">{midlife.investment.price}</p>
+            <p className="mt-1 text-sm font-semibold text-amethyst">{midlife.investment.note}</p>
+            <Link
+              href="/work-with-me#midlife"
+              className="mt-6 inline-block text-sm font-semibold tracking-[0.12em] uppercase underline decoration-gold decoration-2 underline-offset-8 hover:text-amethyst"
+            >
+              See the full program
+            </Link>
           </div>
           <ul className="space-y-5">
             {midlife.included.map((item) => (
-              <li key={item} className="flex gap-4 text-lg leading-relaxed">
-                <span aria-hidden className="mt-3 h-1.5 w-1.5 flex-none rotate-45 bg-gold" />
+              <li key={item} className="flex gap-3 text-lg leading-relaxed">
+                <span aria-hidden className="flex-none text-gold">
+                  &#10022;
+                </span>
                 <span>{item}</span>
               </li>
             ))}

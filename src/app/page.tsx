@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FitSection, OfferCard, Testimonials } from "@/components/content-blocks";
 import { LogoMark } from "@/components/Logo";
 import { ButtonLink, Container, Eyebrow, Section, SignatureLine } from "@/components/ui";
-import { differentiators, offers, pillars, signatureLines, site } from "@/content/site";
+import { differentiators, offerings, pillars, signatureLines, site } from "@/content/site";
 
 export default function Home() {
   return (
@@ -206,12 +206,12 @@ export default function Home() {
           <Eyebrow>Work with me</Eyebrow>
           <h2 className="mt-5 text-4xl sm:text-5xl">Three ways in.</h2>
           <p className="mt-6 text-lg leading-relaxed text-midnight/80">
-            Two paths for sobriety and one for midlife. One-on-one goes deep. The Circle keeps the
-            light on between sessions and after.
+            A 12-week path for sobriety, a 3-month path for midlife, or a single session to start.
+            All one-on-one, all built around your body.
           </p>
         </div>
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
-          {offers.map((o) => (
+          {offerings.map((o) => (
             <OfferCard key={o.id} offer={o} />
           ))}
         </div>
@@ -229,16 +229,16 @@ export default function Home() {
       <section className="bg-lilac-wash py-20 sm:py-24">
         <Container className="grid items-center gap-10 md:grid-cols-[1.5fr_1fr]">
           <div>
-            <Eyebrow>Fully Lit Midlife</Eyebrow>
+            <Eyebrow>Midlife Neurosomatic Coaching</Eyebrow>
             <h2 className="mt-5 text-4xl sm:text-5xl">A stranger to yourself lately?</h2>
             <p className="mt-6 text-lg leading-relaxed text-midnight/80">
-              Perimenopause, burnout, anxiety, an identity that doesn&apos;t fit anymore. Same
-              method, with the sobriety lens swapped for transition. No sobriety focus required.
+              Perimenopause, burnout, anxiety, an identity that doesn&apos;t fit anymore. The same
+              LIGHT Method, with the sobriety lens swapped for transition. No sobriety focus required.
             </p>
           </div>
           <div className="md:text-right">
             <ButtonLink href="/midlife" variant="midnight">
-              Explore Fully Lit Midlife
+              Explore midlife coaching
             </ButtonLink>
           </div>
         </Container>

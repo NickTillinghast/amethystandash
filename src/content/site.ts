@@ -16,7 +16,7 @@ export const site = {
     href: "/quiz",
   },
   // TODO: set once the domain is confirmed.
-  url: "https://amethystandash.com",
+  url: "https://amethystandashcoaching.com",
 };
 
 export const nav = [
@@ -102,97 +102,138 @@ export const pillars: Pillar[] = [
   {
     letter: "T",
     title: "Together",
-    short:
-      "Accountability without hierarchy, a community that co-regulates, and a weekly live call.",
-    body: "You need someone to answer to, minus the hierarchy. An accountability partner and a community that co-regulates and shows up weekly. Eventually, you become the woman who lights the way for the next one.",
-    practices: "Accountability, community, co-regulation, the weekly live call.",
+    short: "An accountability partner who co-regulates with you and shows up every week.",
+    body: "You will not do this alone. I will be an accountability partner that co-regulates with you and shows up weekly. You will begin to become the woman you have always wanted to be and more.",
+    practices: "Accountability, community and co-regulation.",
   },
 ];
 
-export type Offer = {
-  id: "one-to-one" | "circle" | "midlife";
+/** The multi-week 1:1 programs shown in full on Work With Me. */
+export type Program = {
+  id: "body-led-sobriety" | "midlife";
   label: string;
   name: string;
-  /** Price / length / frequency line. Still placeholders. */
-  details: string[];
-  forWho: string;
+  /** Length and session schedule. */
+  format: string;
+  /** Short line for the homepage card. */
   summary: string;
+  /** Price and length for the homepage card. */
+  cardMeta: string;
+  intro: string;
   included: string[];
-  cta: { href: string; label: string };
-  tone: "lilac" | "gold" | "ash";
+  outcomesHeading: string;
+  outcomes: string[];
+  investment: { price: string; note: string };
+  disclaimer?: string;
+  tone: "lilac" | "white";
 };
 
-export const offers: Offer[] = [
+export const programs: Program[] = [
   {
-    id: "one-to-one",
-    label: "For sobriety · Deep work",
-    name: "Fully Lit 1:1 Coaching",
-    details: ["[PRICE]", "[LENGTH, e.g. 3 months]", "[SESSION FREQUENCY]"],
-    forWho:
-      "For the woman who wants personal, deep work on the specific things that keep tormenting her.",
+    id: "body-led-sobriety",
+    label: "For sobriety",
+    name: "Body-Led Sobriety",
+    format:
+      "12 weeks of 1:1 coaching: a 90-minute kickoff, then one 60-minute session every week",
     summary:
-      "Deep personal work across all five pillars, at a pace your body can handle, with the Circle included while we work together.",
+      "12 weeks of 1:1 coaching for women who are done drinking or using, or trying to be. No shame, no labels, no white-knuckling.",
+    cardMeta: "12 weeks · $1,500",
+    intro:
+      "You're done drinking or using, or you're trying to be. But no one told you what to do with everything that comes back once the numbing stops. This is where we figure that out together, with no shame, no labels and no white-knuckling.",
     included: [
-      "A whole-body intake: sleep, energy, hormones, food, stress and lifestyle, so we can see your blind spots",
-      "Deep pattern work on your recurring loops: naming them, honoring what they did for you, and redirecting them into strengths",
-      "Applied neurology tools matched to your nervous system, to build capacity at a pace your body can handle",
-      "Somatic emotional processing in small, manageable doses",
-      "Your personal Instead Menu for the moments you'd normally reach for a drink or a hit",
-      "Human design insight to stop overwriting who you are",
-      "Lifestyle and testing suggestions to bring to your doctor",
-      "Accountability between sessions [HOW: e.g. weekly check-in message]",
-      "Access to the Fully Lit Circle while we work together",
+      "A 90-minute kickoff where we map your patterns, triggers and goals",
+      "11 weekly 60-minute sessions, in person or on video",
+      "Voice or text support Monday through Friday, with replies within 24 hours",
+      "Your personal “instead” menu of what to reach for when you'd normally drink or use",
+      "Body-based tools for processing emotions, made for your nervous system",
+      "A look at your sleep, food, energy and daily rhythm so your body can support your sobriety",
+      "Pattern work that turns your old survival habits into strengths",
     ],
-    cta: { href: "/contact", label: "Book a call" },
+    outcomesHeading: "By the end of 12 weeks, you'll:",
+    outcomes: [
+      "Know what your cravings are really asking for",
+      "Feel your feelings without needing to escape them",
+      "Have tools you trust when life gets hard",
+      "Feel prepared and confident staying sober",
+      "Feel like yourself again, or maybe for the first time",
+    ],
+    investment: {
+      price: "$1,500 paid in full, or 3 payments of $550",
+      note: "Founding client pricing, limited to the first 5 women",
+    },
+    disclaimer:
+      "This is coaching, not medical treatment. If you're drinking heavily, talk to your doctor before you stop, because withdrawal can be dangerous.",
     tone: "lilac",
-  },
-  {
-    id: "circle",
-    label: "For sobriety · Membership",
-    name: "The Fully Lit Circle",
-    details: ["[PRICE] per month", "[WhatsApp or Telegram] community", "Cancel anytime"],
-    forWho:
-      "For the woman who wants ongoing support, practice and people who get it.",
-    summary:
-      "A community that co-regulates, a weekly live call, and an accountability partner. Two scholarship spots open every month.",
-    included: [
-      "A private community chat for real-time support and co-regulation",
-      "One live group call each week, rotating through the five pillars",
-      "An accountability partner from inside the Circle",
-      "Short practices to keep your nervous system resourced between calls",
-      "A place to celebrate milestones and, in time, light the way for newer members",
-    ],
-    cta: { href: "/contact", label: "Join the Circle" },
-    tone: "gold",
   },
   {
     id: "midlife",
     label: "For midlife transition",
-    name: "Fully Lit Midlife",
-    details: ["Neurosomatic coaching", "[PRICE]", "[LENGTH]", "[SESSION FREQUENCY]"],
-    forWho:
-      "For women in midlife transition (perimenopause, burnout, anxiety, an identity that no longer fits) who want to stop being run by old patterns. No sobriety focus required.",
+    name: "Midlife Neurosomatic Coaching",
+    format:
+      "3 months of 1:1 coaching: a 90-minute kickoff, then one 60-minute session per week for the first month and every other week after that (8 sessions in all)",
     summary:
-      "Nervous system and somatic emotional work for perimenopause, burnout and anxiety. No sobriety focus required.",
+      "3 months of 1:1 coaching for when midlife has you wired, numb, anxious or stuck, and the old coping just doesn't work anymore.",
+    cardMeta: "3 months · $1,200",
+    intro:
+      "Midlife is a shift, and your body knows it before your brain catches up. Maybe you feel wired, numb, anxious or stuck, and the coping that used to work just doesn't anymore. This isn't something to push through. Your nervous system is asking for something different, and we're going to listen.",
     included: [
-      "Nervous system education: understand your stress responses and why old patterns keep running",
-      "Applied neurology and somatic tools to build capacity, so big feelings stop feeling like a tidal wave",
-      "Somatic emotional processing in small, manageable doses",
-      "Pattern work: naming the loops, honoring what they did for you, and turning them into strengths",
-      "A whole-body look at hormones, sleep, energy and daily rhythm, with suggestions to bring to your doctor",
-      "Human design insight for the next chapter of who you are",
-      "Option to join the Fully Lit Circle for community and weekly calls",
+      "A 90-minute kickoff where we map your patterns, stress responses and goals",
+      "7 sessions of 60 minutes each: weekly for the first month, then every other week",
+      "Voice or text support 2 to 3 days a week",
+      "Body-based tools for processing emotions, made for your nervous system",
+      "A look at your sleep, energy, hormones and daily rhythm so your body can support you through the transition",
+      "Pattern work that turns your old survival habits into strengths",
+      "Space between sessions to practice, so the changes actually stick",
     ],
-    cta: { href: "/contact", label: "Book a call" },
-    tone: "ash",
+    outcomesHeading: "By the end of 3 months, you'll:",
+    outcomes: [
+      "Understand what your body is telling you",
+      "Process emotions without being swallowed by them",
+      "Have tools you trust for the hard days",
+      "Feel steadier, clearer and more like yourself",
+      "Walk into this next chapter confident and prepared",
+    ],
+    investment: {
+      price: "$1,200 paid in full, or 3 payments of $450",
+      note: "Founding client pricing, limited to the first 5 women",
+    },
+    tone: "white",
   },
 ];
 
-export const howTheyWorkTogether = [
-  "1:1 is the deep dive. The Circle is where the work keeps living.",
-  "Clients finishing 1:1 move into the Circle so they don't lose momentum.",
-  "Circle members can upgrade to 1:1 when they hit something they want to go deep on.",
-  "Fully Lit Midlife uses the same method with the sobriety lens swapped for transition.",
+export const singleSession = {
+  id: "single-session",
+  label: "Start here",
+  name: "Single Session",
+  price: "$97",
+  length: "60-minute call",
+  summary:
+    "One 60-minute session: a first taste of working together, a tune-up, or support through a hard moment.",
+  cardMeta: "60 minutes · $97",
+  whatFor:
+    "You want a first taste of working together, a tune-up after we've worked together, or support through a hard moment.",
+  whatYouLearn: "Clarity on one pattern or struggle, plus a tool you can use right away.",
+  how: "One 60-minute session, in person or on video.",
+};
+
+/** Everything someone can book, for the homepage cards and the contact form. */
+export const offerings = [
+  ...programs.map((p) => ({
+    id: p.id,
+    label: p.label,
+    name: p.name,
+    summary: p.summary,
+    meta: p.cardMeta,
+    href: p.id === "midlife" ? "/midlife" : `/work-with-me#${p.id}`,
+  })),
+  {
+    id: singleSession.id,
+    label: singleSession.label,
+    name: singleSession.name,
+    summary: singleSession.summary,
+    meta: singleSession.cardMeta,
+    href: `/work-with-me#${singleSession.id}`,
+  },
 ];
 
 export const fit = {

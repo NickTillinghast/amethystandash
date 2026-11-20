@@ -1,5 +1,16 @@
 import Link from "next/link";
-import { fit, testimonials, type Offer, type Pillar } from "@/content/site";
+import {
+  fit,
+  pillars,
+  singleSession,
+  testimonials,
+  type offerings,
+  type Pillar,
+  type Program,
+} from "@/content/site";
+import { ButtonLink, Eyebrow } from "./ui";
+
+type Offering = (typeof offerings)[number];
 
 export function Testimonials() {
   return (
@@ -16,7 +27,6 @@ export function Testimonials() {
     </div>
   );
 }
-import { ButtonLink, Eyebrow } from "./ui";
 
 /** "This is for you if… / This is not for you if…" */
 export function FitSection() {
@@ -57,21 +67,29 @@ export function FitSection() {
   );
 }
 
-const offerTone: Record<Offer["tone"], string> = {
+const programTone: Record<Program["tone"], string> = {
   lilac: "bg-lilac-wash",
-  gold: "bg-gold-wash",
-  ash: "bg-white",
+  white: "bg-white",
 };
 
-/** Compact offer card for the home page. */
-export function OfferCard({ offer }: { offer: Offer }) {
+function Sparkle() {
   return (
-    <article className={`flex flex-col rounded-2xl p-8 ${offerTone[offer.tone]}`}>
+    <span aria-hidden className="mt-0.5 flex-none text-gold">
+      &#10022;
+    </span>
+  );
+}
+
+/** Compact card for the homepage. */
+export function OfferCard({ offer }: { offer: Offering }) {
+  return (
+    <article className="flex flex-col rounded-2xl bg-white p-8">
       <p className="eyebrow text-amethyst">{offer.label}</p>
       <h3 className="mt-4 text-3xl">{offer.name}</h3>
+      <p className="mt-2 text-sm font-semibold tracking-wide text-smoke-deep">{offer.meta}</p>
       <p className="mt-4 flex-1 leading-relaxed text-midnight/80">{offer.summary}</p>
       <Link
-        href={offer.id === "midlife" ? "/midlife" : `/work-with-me#${offer.id}`}
+        href={offer.href}
         className="mt-8 text-sm font-semibold tracking-[0.12em] text-midnight uppercase underline decoration-gold decoration-2 underline-offset-8 hover:text-amethyst"
       >
         Learn more
@@ -80,42 +98,109 @@ export function OfferCard({ offer }: { offer: Offer }) {
   );
 }
 
-/** Full offer with everything that's included. */
-export function OfferDetail({ offer, number }: { offer: Offer; number: number }) {
+/** A full 1:1 program: intro, its LIGHT Method, what's included, outcomes and price. */
+export function ProgramDetail({ program }: { program: Program }) {
   return (
-    <article id={offer.id} className={`scroll-mt-24 rounded-2xl p-8 sm:p-12 ${offerTone[offer.tone]}`}>
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-        <div>
-          <p className="eyebrow text-amethyst">
-            Offer {number} · {offer.label}
-          </p>
-          <h2 className="mt-4 text-4xl sm:text-5xl">{offer.name}</h2>
-          <ul className="mt-5 flex flex-wrap gap-2" aria-label="Details">
-            {offer.details.map((d) => (
-              <li
-                key={d}
-                className="rounded-full border border-midnight/15 px-3 py-1 text-xs tracking-wide text-smoke-deep"
-              >
-                {d}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 font-serif text-xl leading-relaxed italic text-midnight/85">{offer.forWho}</p>
-          <ButtonLink href={offer.cta.href} variant="midnight" className="mt-8">
-            {offer.cta.label}
-          </ButtonLink>
-        </div>
-        <div>
-          <p className="eyebrow text-amethyst">What&apos;s included</p>
-          <ul className="mt-5 space-y-4">
-            {offer.included.map((item) => (
-              <li key={item} className="flex gap-4 leading-relaxed">
-                <span aria-hidden className="mt-2.5 h-1.5 w-1.5 flex-none rotate-45 bg-gold" />
+    <article id={program.id} className={`scroll-mt-24 rounded-3xl p-6 sm:p-12 ${programTone[program.tone]}`}>
+      <header className="max-w-3xl">
+        <p className="eyebrow text-amethyst">{program.label}</p>
+        <h2 className="mt-4 text-4xl sm:text-6xl">{program.name}</h2>
+        <p className="mt-4 font-semibold leading-relaxed text-smoke-deep">{program.format}</p>
+        <p className="mt-6 text-lg leading-relaxed text-midnight/85 sm:text-xl">{program.intro}</p>
+      </header>
+
+      <section className="mt-12">
+        <h3 className="eyebrow text-amethyst">The LIGHT Method</h3>
+        <ol className="mt-6 grid gap-x-10 gap-y-6 md:grid-cols-2">
+          {pillars.map((step) => (
+            <li key={step.letter} className="flex gap-5">
+              <span aria-hidden className="w-8 flex-none font-serif text-5xl leading-none text-gold">
+                {step.letter}
+              </span>
+              <div>
+                <h4 className="font-serif text-2xl">
+                  <span className="sr-only">{step.letter}: </span>
+                  {step.title}
+                </h4>
+                <p className="mt-2 leading-relaxed text-midnight/80">{step.body}</p>
+                <p className="mt-2 text-sm tracking-wide text-smoke-deep">{step.practices}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <div className="mt-12 grid gap-10 border-t border-midnight/10 pt-10 lg:grid-cols-2">
+        <section>
+          <h3 className="eyebrow text-amethyst">What&apos;s included</h3>
+          <ul className="mt-5 space-y-3">
+            {program.included.map((item) => (
+              <li key={item} className="flex gap-3 leading-relaxed">
+                <Sparkle />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
+        </section>
+        <section>
+          <h3 className="eyebrow text-amethyst">{program.outcomesHeading}</h3>
+          <ul className="mt-5 space-y-3">
+            {program.outcomes.map((item) => (
+              <li key={item} className="flex gap-3 leading-relaxed">
+                <Sparkle />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <section className="mt-12 flex flex-col gap-6 rounded-2xl bg-midnight p-6 text-cream sm:p-8 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h3 className="eyebrow text-lilac">Investment</h3>
+          <p className="mt-3 font-serif text-2xl sm:text-3xl">{program.investment.price}</p>
+          <p className="mt-2 text-sm font-semibold tracking-wide text-gold">{program.investment.note}</p>
         </div>
+        <ButtonLink href="/contact" className="flex-none">
+          Book a call
+        </ButtonLink>
+      </section>
+
+      {program.disclaimer ? (
+        <p className="mt-6 text-sm leading-relaxed text-smoke-deep">{program.disclaimer}</p>
+      ) : null}
+    </article>
+  );
+}
+
+export function SingleSessionCard() {
+  const s = singleSession;
+  const rows = [
+    { title: "What it's for", body: s.whatFor },
+    { title: "What you'll learn", body: s.whatYouLearn },
+    { title: "How", body: s.how },
+  ];
+  return (
+    <article id={s.id} className="scroll-mt-24 rounded-3xl bg-gold-wash p-6 sm:p-12">
+      <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
+        <div>
+          <p className="eyebrow text-amethyst">{s.label}</p>
+          <h2 className="mt-4 text-4xl sm:text-5xl">{s.name}</h2>
+          <p className="mt-4 font-serif text-3xl">
+            {s.price} <span className="text-xl text-smoke-deep">· {s.length}</span>
+          </p>
+          <ButtonLink href="/contact" variant="midnight" className="mt-8">
+            Book a session
+          </ButtonLink>
+        </div>
+        <dl className="space-y-6">
+          {rows.map((r) => (
+            <div key={r.title} className="border-l-2 border-gold pl-5">
+              <dt className="eyebrow text-amethyst">{r.title}</dt>
+              <dd className="mt-2 text-lg leading-relaxed">{r.body}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </article>
   );

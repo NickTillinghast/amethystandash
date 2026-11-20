@@ -32,11 +32,6 @@ export function SiteFooter() {
                 </li>
               ))}
               <li>
-                <Link href="/scholarship" className="text-cream/80 hover:text-gold">
-                  Circle Scholarship
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="text-cream/80 hover:text-gold">
                   Contact &amp; Book a Call
                 </Link>
