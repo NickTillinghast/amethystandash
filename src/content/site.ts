@@ -12,7 +12,6 @@ export const site = {
     handle: "@breakthefknpattern",
     url: "https://www.instagram.com/breakthefknpattern/",
   },
-  // TODO: point at the real quiz (Typeform, ScoreApp, etc.) once it exists.
   quiz: {
     href: "/quiz",
   },
@@ -241,16 +240,6 @@ export const testimonials = [
       "Amber is incredibly knowledgeable and deeply attuned to the female nervous system. This course gave me practical tools to meet my changing body where it is and create more calm and regulation within my nervous system. I walked away feeling more connected to and understanding of my body, and I'm so grateful for her passion for supporting women on this journey.",
   },
 ];
-
-export const quiz = {
-  title: "What's Your Numbing Pattern?",
-  results: [
-    { name: "The Achiever", body: "Numbs by doing, producing, and never slowing down." },
-    { name: "The Escape Artist", body: "Numbs with wine, weed, or anything that takes the edge off." },
-    { name: "The Caretaker", body: "Numbs by pouring into everyone else and abandoning herself." },
-    { name: "The Burnt-Out Shutdown", body: "Running on empty, foggy, flat, and disconnected from her body." },
-  ],
-};
 
 export const scholarship = {
   spotsPerMonth: 2,

@@ -1,5 +1,8 @@
 "use server";
 
+import type { ResultId } from "@/content/quiz";
+import { parseAnswers, scoreQuiz } from "@/lib/quiz";
+
 export type FormState = {
   status: "idle" | "success" | "error";
   message?: string;
@@ -52,6 +55,42 @@ export async function submitContact(_prev: FormState, formData: FormData): Promi
     status: "success",
     message: "Got it. I'll be in touch within [X business days] to find a time that works.",
   };
+}
+
+export type QuizLeadState = FormState & { resultId?: ResultId };
+
+/**
+ * Captures her email, then reveals her result. The result is worked out again here
+ * from her answers, so the tag sent to the email platform can't be faked by the browser.
+ */
+export async function submitQuizLead(
+  _prev: QuizLeadState,
+  formData: FormData,
+): Promise<QuizLeadState> {
+  const answers = parseAnswers(formData.get("answers"));
+  if (!answers) {
+    return { status: "error", message: "Something went wrong with your answers. Please retake the quiz." };
+  }
+  const resultId = scoreQuiz(answers);
+
+  // Honeypot: pretend it worked so bots move on
+  if (text(formData, "company")) return { status: "success", resultId };
+
+  const email = text(formData, "email");
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return { status: "error", errors: { email: "Please enter a valid email so I can send your result." } };
+  }
+
+  // TODO: add her to the email platform (Kit, MailerLite, Flodesk) tagged with resultId,
+  // which starts the email sequence for her type. For now it's only logged.
+  console.log("[quiz] new lead", {
+    email,
+    firstName: text(formData, "firstName"),
+    result: resultId,
+    answers: answers.join(""),
+  });
+
+  return { status: "success", resultId };
 }
 
 export async function submitScholarship(_prev: FormState, formData: FormData): Promise<FormState> {
