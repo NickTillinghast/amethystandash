@@ -8,10 +8,9 @@ Parameters:
     Type: String
     Default: amethystandashcoaching.com
   # Proves to Google Search Console that we own the domain. Not a secret: anyone can look it up.
-  # Leave empty until Search Console gives you one, then redeploy this stack with it
   GoogleSiteVerification:
     Type: String
-    Default: ""
+    Default: google-site-verification=YKc4l7I1Wft7l7cPco-JvAkVvjyD8Thdj0Hjx_W0Hvg
     Description: e.g. google-site-verification=abc123
 
 Conditions:
