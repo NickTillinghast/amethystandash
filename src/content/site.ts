@@ -271,7 +271,7 @@ export const coach = {
 
 export const testimonials = [
   {
-    name: "Kari",
+    name: "Megan G.",
     quote:
       "Amber has taken the time to master the information on resetting and calming the nervous system. She is a patient teacher and is always open to questions. She guides you through the exercises with grace and makes sure you feel held and cared for. The knowledge she has really works and I have taken it with me and used the skills over and over again. These tools make me feel like I can care for my body in a different, more intrinsic way.",
   },
@@ -279,6 +279,12 @@ export const testimonials = [
     name: "Amber M.",
     quote:
       "Amber is incredibly knowledgeable and deeply attuned to the female nervous system. This course gave me practical tools to meet my changing body where it is and create more calm and regulation within my nervous system. I walked away feeling more connected to and understanding of my body, and I'm so grateful for her passion for supporting women on this journey.",
+  },
+  {
+    name: "Kari L.",
+    stars: 5,
+    quote:
+      "Amber's space is so cozy and calming that I felt at ease the moment I walked in. She's incredibly knowledgeable, and the neurosomatic session was fascinating. She taught me some great tools I found really interesting and can use on my own. I left feeling more connected to my body and my nervous system felt noticeably calmer. Highly recommend if you're looking to slow down and reconnect with yourself.",
   },
 ];
 

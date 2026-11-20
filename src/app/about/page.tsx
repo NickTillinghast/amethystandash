@@ -42,8 +42,7 @@ export default function AboutPage() {
   
             </p>
             <p>
-              Since then I have learned to thrive through feeling my emotions and gaining a level of maturity I never knew I wanted.I have learned to stop abandoning myself and being afraid to speak my authentic truth regardless of who it might make uncomfortable.I have shown myself that no matter what difficult situations arise, I can get persevere confidently. 
-              &apos;ve built a life I don&apos;t want to escape from, and a decade of
+              Since then I have learned to thrive through feeling my emotions and gaining a level of maturity I never knew I wanted.I have learned to stop abandoning myself and being afraid to speak my authentic truth regardless of who it might make uncomfortable.  I have shown myself that no matter what difficult situations arise, I can get persevere confidently. I&apos;ve built a life I don&apos;t want to escape from, and a decade of
               businesses that crossed six figures more than once. I&apos;ve sat in and led many
               circles with women through learning to become the experts of their own nervous systems, led workshops, and walked many clients one-on-one through the
               messy, beautiful work of coming back into their bodies.

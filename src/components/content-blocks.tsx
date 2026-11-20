@@ -14,12 +14,19 @@ type Offering = (typeof offerings)[number];
 
 export function Testimonials() {
   return (
-    <div className="grid gap-6 lg:grid-cols-2">
+    <div className="grid gap-6 lg:grid-cols-3">
       {testimonials.map((t) => (
         <figure key={t.name} className="flex flex-col rounded-2xl bg-midnight-soft p-8 text-cream sm:p-10">
-          <span aria-hidden className="font-serif text-6xl leading-none text-gold">
-            &ldquo;
-          </span>
+          {"stars" in t && t.stars ? (
+            <p className="text-xl tracking-[0.2em] text-gold">
+              <span aria-hidden>{"★".repeat(t.stars)}</span>
+              <span className="sr-only">{t.stars} out of 5 stars</span>
+            </p>
+          ) : (
+            <span aria-hidden className="font-serif text-6xl leading-none text-gold">
+              &ldquo;
+            </span>
+          )}
           <blockquote className="mt-2 flex-1 text-lg leading-relaxed text-cream/90">{t.quote}</blockquote>
           <figcaption className="eyebrow mt-8 text-lilac">{t.name}</figcaption>
         </figure>
