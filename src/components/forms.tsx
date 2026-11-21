@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useActionState, type ReactNode } from "react";
-import { submitContact, submitScholarship, type FormState } from "@/app/actions";
+import { submitContact, type FormState } from "@/app/actions";
 import { offerings } from "@/content/site";
 
 const initial: FormState = { status: "idle" };
@@ -156,62 +156,6 @@ export function ContactForm() {
       <DisclaimerCheckbox error={e.disclaimer} />
       <Status state={state} />
       <SubmitButton pending={pending}>Send</SubmitButton>
-    </form>
-  );
-}
-
-export function ScholarshipForm() {
-  const [state, action, pending] = useActionState(submitScholarship, initial);
-  const e = state.errors ?? {};
-
-  if (state.status === "success") {
-    return <Success title="Thank you for asking." message={state.message} />;
-  }
-
-  return (
-    <form action={action} noValidate className="relative space-y-6">
-      <Honeypot />
-      <div className="grid gap-6 sm:grid-cols-2">
-        <Field label="Your name" name="name" error={e.name}>
-          <input id="name" name="name" autoComplete="name" className="field" required />
-        </Field>
-        <Field label="Email" name="email" error={e.email}>
-          <input id="email" name="email" type="email" autoComplete="email" className="field" required />
-        </Field>
-      </div>
-
-      <Field label="Time zone" name="timezone" optional hint="So the weekly live call works for you.">
-        <input id="timezone" name="timezone" className="field" />
-      </Field>
-
-      <Field
-        label="Where are you with sobriety right now?"
-        name="whereYouAre"
-        error={e.whereYouAre}
-      >
-        <textarea id="whereYouAre" name="whereYouAre" rows={4} className="field" required />
-      </Field>
-
-      <Field
-        label="What would support from the Circle change for you?"
-        name="whySupport"
-        error={e.whySupport}
-      >
-        <textarea id="whySupport" name="whySupport" rows={4} className="field" required />
-      </Field>
-
-      <Field
-        label="Anything you'd like me to know about your situation?"
-        name="situation"
-        optional
-        hint="No proof, no paperwork. Share only what you're comfortable with."
-      >
-        <textarea id="situation" name="situation" rows={3} className="field" />
-      </Field>
-
-      <DisclaimerCheckbox error={e.disclaimer} />
-      <Status state={state} />
-      <SubmitButton pending={pending}>Apply</SubmitButton>
     </form>
   );
 }

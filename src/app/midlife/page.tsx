@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/seo";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
-import { programs, signatureLines } from "@/content/site";
+import { programs, signatureLines, site } from "@/content/site";
 
 export const metadata = pageMetadata({
   title: "Midlife Neurosomatic Coaching: Perimenopause & Burnout",
@@ -102,7 +102,7 @@ export default function MidlifePage() {
               Let&apos;s talk about what this season is asking of you.
             </p>
           </div>
-          <ButtonLink href="/contact" variant="midnight">
+          <ButtonLink href={site.booking.href} variant="midnight">
             Book a call
           </ButtonLink>
         </div>

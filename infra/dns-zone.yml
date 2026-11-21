@@ -35,7 +35,8 @@ Resources:
       Type: TXT
       TTL: "300"
       ResourceRecords:
-        - '"v=spf1 include:spf.improvmx.com ~all"'
+        # ImprovMX (forwarding) + Sender.net (newsletters and quiz emails)
+        - '"v=spf1 include:spf.improvmx.com include:sendersrv.com ~all"'
         - !If
           - HasGoogleSiteVerification
           - !Sub '"${GoogleSiteVerification}"'
@@ -64,7 +65,18 @@ Resources:
       Type: TXT
       TTL: "300"
       ResourceRecords:
-        - '"v=DMARC1; p=none"'
+        - '"v=DMARC1; p=none;"'
+
+  # Sender.net signs its emails with this key, so inboxes can tell they really came from us
+  SenderDkim:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Sub sender._domainkey.${DomainName}
+      Type: CNAME
+      TTL: "300"
+      ResourceRecords:
+        - dkim.sendersrv.com
 
 Outputs:
   HostedZoneId:

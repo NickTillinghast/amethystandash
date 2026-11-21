@@ -245,7 +245,7 @@ export default function Home() {
             pitch-slapping.
           </p>
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-            <ButtonLink href="/contact">Book a call</ButtonLink>
+            <ButtonLink href={site.booking.href}>Book a call</ButtonLink>
             <ButtonLink href={site.instagram.url} variant="outline-light">
               {site.instagram.handle}
             </ButtonLink>

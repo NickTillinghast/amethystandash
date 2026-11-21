@@ -15,7 +15,10 @@ export const site = {
   quiz: {
     href: "/quiz",
   },
-  // TODO: set once the domain is confirmed.
+  // Cal.com booking page, used by every "Book a call" / "Book a session" button
+  booking: {
+    href: "https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va",
+  },
   url: "https://amethystandashcoaching.com",
 };
 
@@ -288,6 +291,3 @@ export const testimonials = [
   },
 ];
 
-export const scholarship = {
-  spotsPerMonth: 2,
-};

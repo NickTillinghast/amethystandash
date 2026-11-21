@@ -8,7 +8,6 @@ const routes = [
   "/midlife",
   "/about",
   "/quiz",
-  "/scholarship",
   "/contact",
   "/disclaimer",
 ];

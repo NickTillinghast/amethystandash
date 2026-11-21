@@ -92,18 +92,3 @@ export async function submitQuizLead(
 
   return { status: "success", resultId };
 }
-
-export async function submitScholarship(_prev: FormState, formData: FormData): Promise<FormState> {
-  if (text(formData, "company")) return { status: "success" };
-
-  const errors = validate(formData, ["name", "email", "whereYouAre", "whySupport"]);
-  if (Object.keys(errors).length) {
-    return { status: "error", errors, message: "A couple of things need a look." };
-  }
-  await deliver("scholarship", formData);
-  return {
-    status: "success",
-    message:
-      "Your application is in. Thank you for trusting me with it. Scholarship spots are chosen at the start of each month, and you'll hear back either way.",
-  };
-}

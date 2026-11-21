@@ -1,7 +1,7 @@
 import { pageMetadata } from "@/lib/seo";
 import { PillarRow } from "@/components/content-blocks";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
-import { differentiators, pillars, signatureLines } from "@/content/site";
+import { differentiators, pillars, signatureLines, site } from "@/content/site";
 
 export const metadata = pageMetadata({
   title: "The Fully Lit Method: Body-Led Sobriety for Women",
@@ -62,14 +62,14 @@ export default function MethodPage() {
           <div className="max-w-xl">
             <h2 className="text-4xl sm:text-5xl">Ready to work the pillars?</h2>
             <p className="mt-4 text-lg text-midnight/80">
-              Go deep one-on-one, or join the Circle and do it alongside women who get it.
+              Work through all five, one-on-one, at a pace your body can handle.
             </p>
           </div>
           <div className="flex flex-col gap-4 sm:flex-row">
             <ButtonLink href="/work-with-me" variant="midnight">
               See the offers
             </ButtonLink>
-            <ButtonLink href="/contact" variant="outline-dark">
+            <ButtonLink href={site.booking.href} variant="outline-dark">
               Book a call
             </ButtonLink>
           </div>

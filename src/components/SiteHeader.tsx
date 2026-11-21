@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { nav } from "@/content/site";
+import { nav, site } from "@/content/site";
 import { LogoMark, Wordmark } from "./Logo";
 
 export function SiteHeader() {
@@ -32,12 +32,14 @@ export function SiteHeader() {
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
+          <a
+            href={site.booking.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-gold px-5 py-2 text-xs font-semibold tracking-[0.12em] text-midnight uppercase transition-colors hover:bg-[#ecc97f]"
           >
             Book a call
-          </Link>
+          </a>
         </nav>
 
         <button
@@ -74,12 +76,14 @@ export function SiteHeader() {
               </li>
             ))}
           </ul>
-          <Link
-            href="/contact"
+          <a
+            href={site.booking.href}
+            target="_blank"
+            rel="noopener noreferrer"
             className="mt-4 inline-flex rounded-full bg-gold px-6 py-3 text-xs font-semibold tracking-[0.12em] text-midnight uppercase"
           >
             Book a call
-          </Link>
+          </a>
         </nav>
       ) : null}
     </header>

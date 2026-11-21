@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     // Lambda's disk is read-only, so keep refreshed pages in memory instead of writing them
     isrFlushToDisk: false,
   },
+  async redirects() {
+    return [{ source: "/scholarship", destination: "/work-with-me", permanent: true }];
+  },
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,

@@ -1,7 +1,7 @@
 import { pageMetadata } from "@/lib/seo";
 import { Testimonials } from "@/components/content-blocks";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
-import { coach, signatureLines } from "@/content/site";
+import { coach, signatureLines, site } from "@/content/site";
 
 export const metadata = pageMetadata({
   title: "About Amber: Sober Coach, 20 Years Sober",
@@ -104,7 +104,7 @@ export default function AboutPage() {
       <Section>
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           <h2 className="max-w-xl text-4xl sm:text-5xl">Want to talk about where you are?</h2>
-          <ButtonLink href="/contact" variant="midnight">
+          <ButtonLink href={site.booking.href} variant="midnight">
             Book a call
           </ButtonLink>
         </div>

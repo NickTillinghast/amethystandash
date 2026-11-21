@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitQuizLead, type QuizLeadState } from "@/app/actions";
 import { questions, quizTitle, results, type Letter, type QuizResult } from "@/content/quiz";
+import { site } from "@/content/site";
 
 const LETTERS: Letter[] = ["A", "B", "C", "D"];
 const INTRO = -1;
@@ -261,12 +262,14 @@ function ResultView({
         <p className="max-w-lg font-serif text-2xl leading-snug sm:text-3xl">
           {result.callToAction}
         </p>
-        <Link
-          href="/contact"
+        <a
+          href={site.booking.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center rounded-full bg-gold px-8 py-4 text-sm font-semibold tracking-[0.12em] text-midnight uppercase transition-colors hover:bg-[#ecc97f]"
         >
           Book a call
-        </Link>
+        </a>
         <button
           type="button"
           onClick={onRetake}
