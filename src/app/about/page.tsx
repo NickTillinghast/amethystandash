@@ -1,3 +1,5 @@
+import Image from "next/image";
+import amberPhoto from "../../../public/assets/IMG_7783.png";
 import { pageMetadata } from "@/lib/seo";
 import { Testimonials } from "@/components/content-blocks";
 import { ButtonLink, Container, Eyebrow, PageHero, Section, SignatureLine } from "@/components/ui";
@@ -25,9 +27,16 @@ export default function AboutPage() {
       <Section>
         <div className="grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
           <div>
-            {/* TODO: swap for a real photo, e.g. <Image src="/about.jpg" ... /> */}
-            <div className="flex aspect-[4/5] items-center justify-center rounded-2xl bg-ash text-sm text-smoke-deep">
-              Photo goes here
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-ash">
+              <Image
+                src={amberPhoto}
+                alt="Amber sitting on a wooden fence in a green field, with mountains behind her"
+                fill
+                placeholder="blur"
+                sizes="(min-width: 1024px) 38vw, (min-width: 640px) 90vw, 100vw"
+                // The photo has a lot of sky above her, so frame on her rather than the center
+                className="object-cover object-[50%_78%]"
+              />
             </div>
           </div>
           <div className="space-y-6 text-lg leading-relaxed text-midnight/85">

@@ -7,8 +7,12 @@ import { NextResponse, type NextRequest } from "next/server";
 function fromCloudFront(request: NextRequest) {
   const secret = process.env.ORIGIN_VERIFY_SECRET;
   if (!secret) return true;
+  const { pathname } = request.nextUrl;
   // The Lambda Web Adapter checks this from inside the container before sending traffic
-  if (request.nextUrl.pathname === "/api/health") return true;
+  if (pathname === "/api/health") return true;
+  // To resize a local image, Next fetches it from its own server without CloudFront's header.
+  // These are public files anyone can already load, so nothing is exposed
+  if (pathname.startsWith("/_next/static/") || pathname.startsWith("/assets/")) return true;
 
   const sent = Buffer.from(request.headers.get("x-origin-verify") ?? "");
   const expected = Buffer.from(secret);
