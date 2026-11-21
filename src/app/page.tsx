@@ -215,14 +215,6 @@ export default function Home() {
             <OfferCard key={o.id} offer={o} />
           ))}
         </div>
-        <p className="mt-10 max-w-2xl text-smoke-deep">
-          Money shouldn&apos;t be the reason a woman can&apos;t get support. Two Circle spots each
-          month are free.{" "}
-          <Link href="/scholarship" className="font-semibold text-amethyst underline underline-offset-4">
-            Apply for a scholarship
-          </Link>
-          .
-        </p>
       </Section>
 
       {/* Midlife door */}

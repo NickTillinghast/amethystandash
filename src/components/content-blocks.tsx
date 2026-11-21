@@ -196,7 +196,7 @@ export function SingleSessionCard() {
           <p className="mt-4 font-serif text-3xl">
             {s.price} <span className="text-xl text-smoke-deep">· {s.length}</span>
           </p>
-          <ButtonLink href="/contact" variant="midnight" className="mt-8">
+          <ButtonLink href="https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va" variant="midnight" className="mt-8">
             Book a session
           </ButtonLink>
         </div>

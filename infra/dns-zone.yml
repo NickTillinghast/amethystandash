@@ -24,17 +24,47 @@ Resources:
       HostedZoneConfig:
         Comment: Amethyst & Ash (registered at Wix, DNS here)
 
-  # TXT records on the bare domain. Add other verifications (Bing, email providers) to this list
+  # TXT records on the bare domain. Add other verifications (Bing, email providers) to this list.
+  # A domain can have only ONE SPF ("v=spf1 ...") value: add new senders as another include:
+  # in that same line (e.g. Sender.net), never as a second SPF entry
   RootTxt:
     Type: AWS::Route53::RecordSet
-    Condition: HasGoogleSiteVerification
     Properties:
       HostedZoneId: !Ref HostedZone
       Name: !Ref DomainName
       Type: TXT
       TTL: "300"
       ResourceRecords:
-        - !Sub '"${GoogleSiteVerification}"'
+        - '"v=spf1 include:spf.improvmx.com ~all"'
+        - !If
+          - HasGoogleSiteVerification
+          - !Sub '"${GoogleSiteVerification}"'
+          - !Ref AWS::NoValue
+
+  # Incoming email: ImprovMX forwards mail sent to @amethystandashcoaching.com
+  # (e.g. hello@) to an existing inbox. Aliases are managed in the ImprovMX dashboard
+  Mx:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Ref DomainName
+      Type: MX
+      TTL: "300"
+      ResourceRecords:
+        - 10 mx1.improvmx.com
+        - 20 mx2.improvmx.com
+
+  # Tells inboxes what to do with mail that fails SPF/DKIM. p=none only monitors, it never
+  # blocks anything. Gmail and Yahoo expect a DMARC record from anyone sending newsletters
+  Dmarc:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !Ref HostedZone
+      Name: !Sub _dmarc.${DomainName}
+      Type: TXT
+      TTL: "300"
+      ResourceRecords:
+        - '"v=DMARC1; p=none"'
 
 Outputs:
   HostedZoneId:
