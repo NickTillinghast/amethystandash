@@ -100,11 +100,12 @@ jobs:
           aws s3 sync ./static "s3://$BUCKET/_next/static" \
             --cache-control "public,max-age=31536000,immutable"
 
-      # The secret comes in as an env var (not pasted into the script) and GitHub masks it in the log.
+      # Secrets come in as env vars (not pasted into the script) and GitHub masks them in the log.
       # The first run creates the stack; CloudFront takes 5-15 minutes the first time
       - name: Deploy the app stack
         env:
           ORIGIN_VERIFY_SECRET: ${{ secrets.ORIGIN_VERIFY_SECRET }}
+          SENDER_API_TOKEN: ${{ secrets.SENDER_API_TOKEN }}
         run: |
           aws cloudformation deploy \
             --stack-name "$APP_STACK" \
@@ -112,7 +113,8 @@ jobs:
             --no-fail-on-empty-changeset \
             --parameter-overrides \
               "ImageUri=$IMAGE" \
-              "OriginVerifySecret=$ORIGIN_VERIFY_SECRET"
+              "OriginVerifySecret=$ORIGIN_VERIFY_SECRET" \
+              "SenderApiToken=$SENDER_API_TOKEN"
 
       # Pages are cached at CloudFront, so drop them after every deploy or visitors keep
       # getting the old version. "/*" counts as one path (1,000 a month are free)

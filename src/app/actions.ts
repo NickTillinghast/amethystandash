@@ -2,6 +2,7 @@
 
 import type { ResultId } from "@/content/quiz";
 import { parseAnswers, scoreQuiz } from "@/lib/quiz";
+import { addQuizSubscriber } from "@/lib/sender";
 
 export type FormState = {
   status: "idle" | "success" | "error";
@@ -81,14 +82,21 @@ export async function submitQuizLead(
     return { status: "error", errors: { email: "Please enter a valid email so I can send your result." } };
   }
 
-  // TODO: add her to the email platform (Kit, MailerLite, Flodesk) tagged with resultId,
-  // which starts the email sequence for her type. For now it's only logged.
-  console.log("[quiz] new lead", {
-    email,
-    firstName: text(formData, "firstName"),
-    result: resultId,
-    answers: answers.join(""),
-  });
+  const firstName = text(formData, "firstName");
+  try {
+    // Joins the Sender.net group for her result, which starts that result's email series
+    await addQuizSubscriber({ email, firstName, resultId });
+    console.log("[quiz] added to Sender", { result: resultId });
+  } catch (err) {
+    // She still sees her result. The lead is kept here (CloudWatch logs) to add by hand
+    console.error("[quiz] Sender failed, lead kept in this log", {
+      email,
+      firstName,
+      result: resultId,
+      answers: answers.join(""),
+      error: err instanceof Error ? err.message : String(err),
+    });
+  }
 
   return { status: "success", resultId };
 }

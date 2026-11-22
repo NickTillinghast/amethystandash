@@ -16,6 +16,11 @@ Parameters:
     NoEcho: true
     MinLength: 32
     Description: Random string CloudFront sends with every request, the app rejects anything without it
+  SenderApiToken:
+    Type: String
+    NoEcho: true
+    Default: ""
+    Description: Sender.net API token, so quiz signups join their result's group (empty = quiz signups only logged)
   ReservedConcurrency:
     Type: Number
     Default: 0
@@ -58,6 +63,7 @@ Resources:
       Environment:
         Variables:
           ORIGIN_VERIFY_SECRET: !Ref OriginVerifySecret
+          SENDER_API_TOKEN: !Ref SenderApiToken
 
   # Public URL, locked in practice by the secret header CloudFront adds (checked in src/proxy.ts).
   # CloudFront's OAC signing can't be used: it breaks POST bodies, and the forms are POSTs
