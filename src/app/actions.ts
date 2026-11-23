@@ -62,7 +62,7 @@ export async function submitContact(_prev: FormState, formData: FormData): Promi
   });
   return {
     status: "success",
-    message: "Got it. I'll be in touch within [X business days] to find a time that works.",
+    message: "Got it. I'll be in touch within 24 hours to find a time that works.",
   };
 }
 

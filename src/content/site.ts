@@ -15,7 +15,7 @@ export const site = {
   quiz: {
     href: "/quiz",
   },
-  // Cal.com booking page, used by every "Book a call" / "Book a session" button
+  // Cal.com free call, used by every "Book a call" button (the paid Single Session has its own link)
   booking: {
     href: "https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va",
   },
@@ -210,6 +210,8 @@ export const singleSession = {
   name: "Single Session",
   price: "$97",
   length: "60-minute call",
+  // Paid Cal.com event: she picks a time and pays through Stripe in one step
+  bookingHref: "https://cal.com/amber-tillinghast-qldoip/neurosomatic-session",
   summary:
     "One 60-minute session: a first taste of working together, a tune-up, or support through a hard moment.",
   cardMeta: "60 minutes · $97",

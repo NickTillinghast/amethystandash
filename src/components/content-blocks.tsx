@@ -197,7 +197,7 @@ export function SingleSessionCard() {
           <p className="mt-4 font-serif text-3xl">
             {s.price} <span className="text-xl text-smoke-deep">· {s.length}</span>
           </p>
-          <ButtonLink href={site.booking.href} variant="midnight" className="mt-8">
+          <ButtonLink href={s.bookingHref} variant="midnight" className="mt-8">
             Book a session
           </ButtonLink>
         </div>
