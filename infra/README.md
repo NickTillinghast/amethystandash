@@ -155,11 +155,12 @@ Each contact message and quiz signup sends Amber a short email from
    ```
 
 3. AWS emails the alert inbox a verification link. Click it once (expires after 24 hours).
-4. GitHub → Settings → Secrets and variables → Actions → **Variables**: add `NOTIFY_EMAIL` with the same inbox, then redeploy.
+4. GitHub → Settings → Secrets and variables → Actions → **Secrets**: add `NOTIFY_EMAIL` with the same inbox, then redeploy.
+   A secret, not a variable: the repo is public, so are its Actions logs, and only secrets are hidden in them.
 
 SES starts in a "sandbox": it can only send to verified addresses, 200 a day. That's all the alerts need,
 so there's no need to request production access. If the inbox changes, redeploy step 2 with the new one,
-click the new link, and update the variable.
+click the new link, and update the secret.
 
 ## Everyday use
 
