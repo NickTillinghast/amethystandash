@@ -1,6 +1,8 @@
 "use server";
 
-import type { ResultId } from "@/content/quiz";
+import { results, type ResultId } from "@/content/quiz";
+import { offerings } from "@/content/site";
+import { notifyAmber } from "@/lib/notify";
 import { parseAnswers, scoreQuiz } from "@/lib/quiz";
 import { addQuizSubscriber } from "@/lib/sender";
 
@@ -31,18 +33,6 @@ function validate(formData: FormData, required: string[]) {
   return errors;
 }
 
-/**
- * TODO: connect these to the real tools once chosen (e.g. send an email with
- * Resend, add to a CRM, or forward to the booking tool). Right now submissions
- * are only logged on the server.
- */
-async function deliver(kind: string, formData: FormData) {
-  const entry = Object.fromEntries(
-    [...formData.entries()].filter(([k]) => !k.startsWith("$") && k !== "company"),
-  );
-  console.log(`[${kind}] new submission`, entry);
-}
-
 export async function submitContact(_prev: FormState, formData: FormData): Promise<FormState> {
   // Honeypot: real people never see or fill this field.
   if (text(formData, "company")) return { status: "success" };
@@ -51,7 +41,25 @@ export async function submitContact(_prev: FormState, formData: FormData): Promi
   if (Object.keys(errors).length) {
     return { status: "error", errors, message: "A couple of things need a look." };
   }
-  await deliver("contact", formData);
+
+  const name = text(formData, "name");
+  const email = text(formData, "email");
+  const interest = text(formData, "interest");
+  const interestName =
+    offerings.find((o) => o.id === interest)?.name ??
+    (interest === "not-sure" ? "Not sure yet, let's talk" : interest);
+  console.log("[contact] new submission", { interest });
+  await notifyAmber({
+    subject: `New message from ${name}`,
+    replyTo: email,
+    lines: [
+      ["Name", name],
+      ["Email", email],
+      ["Interested in", interestName],
+      ["Message", text(formData, "message")],
+      ["How they found you", text(formData, "source")],
+    ],
+  });
   return {
     status: "success",
     message: "Got it. I'll be in touch within [X business days] to find a time that works.",
@@ -97,6 +105,18 @@ export async function submitQuizLead(
       error: err instanceof Error ? err.message : String(err),
     });
   }
+
+  const resultName = results[resultId].name;
+  await notifyAmber({
+    subject: `${firstName || email} took the quiz: ${resultName}`,
+    replyTo: email,
+    lines: [
+      ["Name", firstName || "(not given)"],
+      ["Email", email],
+      ["Result", resultName],
+      ["Email series", `Started in Sender (${resultName} group)`],
+    ],
+  });
 
   return { status: "success", resultId };
 }

@@ -139,6 +139,28 @@ Push to `main`, or click **Actions → Deploy → Run workflow**. The first run 
 
   Then submit `https://amethystandashcoaching.com/sitemap.xml` in Search Console.
 
+### 9. Email alerts for new leads (Amazon SES)
+
+Each contact message and quiz signup sends Amber a short email from
+`notifications@amethystandashcoaching.com`, with Reply-To set to the visitor. Costs $0.10 per 1,000 emails.
+
+1. Redeploy the bootstrap stack (step 2) so the site's Lambda role is allowed to send.
+2. Deploy the email stack. It verifies the domain (adds the DKIM records itself) and the alert inbox:
+
+   ```bash
+   aws cloudformation deploy \
+     --stack-name amethystandash-email \
+     --template-file infra/email.yml \
+     --parameter-overrides "NotifyEmail=<alert inbox>"
+   ```
+
+3. AWS emails the alert inbox a verification link. Click it once (expires after 24 hours).
+4. GitHub → Settings → Secrets and variables → Actions → **Variables**: add `NOTIFY_EMAIL` with the same inbox, then redeploy.
+
+SES starts in a "sandbox": it can only send to verified addresses, 200 a day. That's all the alerts need,
+so there's no need to request production access. If the inbox changes, redeploy step 2 with the new one,
+click the new link, and update the variable.
+
 ## Everyday use
 
 - **Deploy:** push to `main`. If lint, the type check, or the template check fails, nothing ships.

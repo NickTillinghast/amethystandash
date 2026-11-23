@@ -106,6 +106,8 @@ jobs:
         env:
           ORIGIN_VERIFY_SECRET: ${{ secrets.ORIGIN_VERIFY_SECRET }}
           SENDER_API_TOKEN: ${{ secrets.SENDER_API_TOKEN }}
+          # A variable, not a secret: Amber's inbox for alerts, kept out of the public repo
+          NOTIFY_EMAIL: ${{ vars.NOTIFY_EMAIL }}
         run: |
           aws cloudformation deploy \
             --stack-name "$APP_STACK" \
@@ -114,7 +116,8 @@ jobs:
             --parameter-overrides \
               "ImageUri=$IMAGE" \
               "OriginVerifySecret=$ORIGIN_VERIFY_SECRET" \
-              "SenderApiToken=$SENDER_API_TOKEN"
+              "SenderApiToken=$SENDER_API_TOKEN" \
+              "NotifyEmail=$NOTIFY_EMAIL"
 
       # Pages are cached at CloudFront, so drop them after every deploy or visitors keep
       # getting the old version. "/*" counts as one path (1,000 a month are free)

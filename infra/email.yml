@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >-
+  Amethyst & Ash, one-time (deploy by hand, as an admin, after dns-zone.yml):
+  Amazon SES, so the site can email Amber about new contact messages and quiz signups.
+  Verifies the domain (DKIM records added here automatically) and the inbox the alerts go to.
+
+Parameters:
+  DomainName:
+    Type: String
+    Default: amethystandashcoaching.com
+  NotifyEmail:
+    Type: String
+    Description: >-
+      Where the alerts go. While SES is in its "sandbox" it can only send to verified
+      addresses, so AWS emails this inbox a link to click once. Kept out of the repo
+      (passed with --parameter-overrides)
+
+Resources:
+  # Lets SES send as anything@amethystandashcoaching.com, signed with DKIM so Gmail trusts it
+  DomainIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: !Ref DomainName
+      DkimSigningAttributes:
+        NextSigningKeyLength: RSA_2048_BIT
+
+  DkimRecord1:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !ImportValue amethystandash-hosted-zone-id
+      Name: !GetAtt DomainIdentity.DkimDNSTokenName1
+      Type: CNAME
+      TTL: "300"
+      ResourceRecords:
+        - !GetAtt DomainIdentity.DkimDNSTokenValue1
+
+  DkimRecord2:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !ImportValue amethystandash-hosted-zone-id
+      Name: !GetAtt DomainIdentity.DkimDNSTokenName2
+      Type: CNAME
+      TTL: "300"
+      ResourceRecords:
+        - !GetAtt DomainIdentity.DkimDNSTokenValue2
+
+  DkimRecord3:
+    Type: AWS::Route53::RecordSet
+    Properties:
+      HostedZoneId: !ImportValue amethystandash-hosted-zone-id
+      Name: !GetAtt DomainIdentity.DkimDNSTokenName3
+      Type: CNAME
+      TTL: "300"
+      ResourceRecords:
+        - !GetAtt DomainIdentity.DkimDNSTokenValue3
+
+  # Sandbox only: the one inbox SES may deliver to. Creating this sends the verification email
+  NotifyInbox:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: !Ref NotifyEmail
