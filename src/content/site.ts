@@ -162,7 +162,7 @@ export const programs: Program[] = [
     ],
     investment: {
       price: "$1,500 paid in full, or 3 payments of $550",
-      note: "Founding client pricing, limited to the first 5 women",
+      note: "Founding client pricing, limited to the first 2 women",
     },
     disclaimer:
       "This is coaching, not medical treatment. If you're drinking heavily, talk to your doctor before you stop, because withdrawal can be dangerous.",
@@ -198,7 +198,7 @@ export const programs: Program[] = [
     ],
     investment: {
       price: "$1,200 paid in full, or 3 payments of $450",
-      note: "Founding client pricing, limited to the first 5 women",
+      note: "Founding client pricing, limited to the first 2 women",
     },
     tone: "white",
   },

@@ -166,7 +166,7 @@ And if now isn't the time, that's okay too. You'll still hear from me now and th
 
 Amber
 
-P.S. Founding client spots are limited to the first 5 women in each program. If you've been on the fence, this is a good time to talk.
+P.S. Founding client spots are limited to the first 2 women in each program. If you've been on the fence, this is a good time to talk.
 
 ---
 
@@ -302,7 +302,7 @@ What kept you surviving can be what keeps you sober. I really believe that.
 
 Amber
 
-P.S. I'm taking founding clients for Body-Led Sobriety at a lower price, and it's limited to the first 5 women. If you've been thinking about it, now's a good time to talk.
+P.S. I'm taking founding clients for Body-Led Sobriety at a lower price, and it's limited to the first 2 women. If you've been thinking about it, now's a good time to talk.
 
 ---
 
@@ -434,7 +434,7 @@ Saying yes to this is a small act of putting yourself on your own list. I hope y
 
 Amber
 
-P.S. Founding client spots are limited to the first 5 women in each program. If you've been thinking about it, this is a good time to talk.
+P.S. Founding client spots are limited to the first 2 women in each program. If you've been thinking about it, this is a good time to talk.
 
 ---
 
@@ -567,4 +567,4 @@ Your body already knows the way out. Sometimes it just needs someone to help it 
 
 Amber
 
-P.S. Founding client spots are limited to the first 5 women in each program. If you're curious, this is a good time to talk.
+P.S. Founding client spots are limited to the first 2 women in each program. If you're curious, this is a good time to talk.
