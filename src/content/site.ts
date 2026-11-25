@@ -17,7 +17,7 @@ export const site = {
   },
   // Cal.com free call, used by every "Book a call" button (the paid Single Session has its own link)
   booking: {
-    href: "https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va",
+    href: "https://cal.com/amber-tillinghast-qldoip/30min",
   },
   url: "https://amethystandashcoaching.com",
 };

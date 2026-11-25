@@ -15,7 +15,7 @@ Four automated series, one per quiz result. Each one starts when someone joins t
 
 - **Timing for every series:** Email 1 right away, then wait 2 days before each of the rest. Email 2 lands on day 2, Email 3 on day 4, Email 4 on day 6 and Email 5 on day 8.
 - **First name:** where it says `[First name]`, insert Sender's first-name merge tag. Set its fallback to "there", so it reads "Hi there," when someone skips the name field.
-- **Booking link:** every "book a free call" link goes to https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va
+- **Booking link:** every "book a free call" link goes to https://cal.com/amber-tillinghast-qldoip/30min
 - **From:** Amber | Amethyst & Ash, hello@amethystandashcoaching.com
 - **Sign-off:** "Amber" for every email. Add a P.S. wherever there's one written below.
 - **Keep the safety lines in:** Escape Artist Email 1 and Burnt-Out Shutdown Email 1.
@@ -49,7 +49,7 @@ Practice stopping before you're "done." Once a day, set a 5-minute timer, put yo
 
 Over the next week I'll send you a few short emails about this pattern: where it comes from, why it's so convincing, and what actually changes it.
 
-If you'd rather talk now, [book a free call](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va). Let's talk about what slowing down could actually look like for you.
+If you'd rather talk now, [book a free call](https://cal.com/amber-tillinghast-qldoip/30min). Let's talk about what slowing down could actually look like for you.
 
 Amber
 
@@ -160,7 +160,7 @@ That's possible. I've watched it happen, and I've lived it.
 
 I'd love to talk with you about what that could look like for you. It's a free call, with no pressure and no pitch-slapping. Just a real conversation about where you are and what would actually help.
 
-[**Book your free call**](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va)
+[**Book your free call**](https://cal.com/amber-tillinghast-qldoip/30min)
 
 And if now isn't the time, that's okay too. You'll still hear from me now and then, and you can reply to any email. I read them all.
 
@@ -198,7 +198,7 @@ Get curious about the 10 minutes before you reach. Next time the urge hits, paus
 
 Over the next week I'll send you a few short emails about this pattern. No lectures, no labels. Just what's actually going on and what helps.
 
-If you'd rather talk now, [book a free call](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va). Let's talk about what freedom could look like for you.
+If you'd rather talk now, [book a free call](https://cal.com/amber-tillinghast-qldoip/30min). Let's talk about what freedom could look like for you.
 
 Amber
 
@@ -296,7 +296,7 @@ If you've read this far, I'm guessing part of you is ready for something differe
 
 I'd love to talk with you. It's a free call, and it's just a conversation: where you are, what you've tried, and what might actually help. No shame and no labels, and you don't have to have it all figured out.
 
-[**Book your free call**](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va)
+[**Book your free call**](https://cal.com/amber-tillinghast-qldoip/30min)
 
 What kept you surviving can be what keeps you sober. I really believe that.
 
@@ -332,7 +332,7 @@ Ask yourself one question every day, before you ask anyone else: "What do I need
 
 Over the next week I'll send you a few short emails about this pattern, and about how to come back to yourself without abandoning the people you love.
 
-If you'd rather talk now, [book a free call](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va). It's your turn. Let's talk about what you need.
+If you'd rather talk now, [book a free call](https://cal.com/amber-tillinghast-qldoip/30min). It's your turn. Let's talk about what you need.
 
 Amber
 
@@ -428,7 +428,7 @@ You spend so much of your life showing up for other people. I'd love to give you
 
 It's a free call: a real conversation about where you are, what you need, and what might actually help. No pressure, and no one to take care of.
 
-[**Book your free call**](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va)
+[**Book your free call**](https://cal.com/amber-tillinghast-qldoip/30min)
 
 Saying yes to this is a small act of putting yourself on your own list. I hope you will.
 
@@ -466,7 +466,7 @@ Go gentle, not harder. Pick one small thing each day that brings a little life b
 
 Over the next week I'll send you a few short, gentle emails. You don't have to do anything with them. Just read them when you have a minute.
 
-If you'd rather talk now, [book a free call](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va). Let's talk about getting your spark back.
+If you'd rather talk now, [book a free call](https://cal.com/amber-tillinghast-qldoip/30min). Let's talk about getting your spark back.
 
 Amber
 
@@ -561,7 +561,7 @@ I know that when you're running on empty, even booking a call can feel like one 
 
 We'll talk about where you are, what's been draining you, and what might help your body feel safe enough to come back online.
 
-[**Book your free call**](https://app.cal.com/links/1cG3YXLB1aH5TGbHkaw8va)
+[**Book your free call**](https://cal.com/amber-tillinghast-qldoip/30min)
 
 Your body already knows the way out. Sometimes it just needs someone to help it remember.
 
